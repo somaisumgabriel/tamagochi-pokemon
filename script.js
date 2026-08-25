@@ -382,10 +382,10 @@ function selecionarPokemon(pokemon) {
 
 
 // ==========================================
-// CONFIRMAR ESCOLHA
+// CONFIRMAR ESCOLHA (LOCALSTORAGE)
 // ==========================================
 
-async function confirmarPokemon() {
+function confirmarPokemon() {
 
     // Verifica se escolheu Pokémon
 
@@ -405,77 +405,18 @@ async function confirmarPokemon() {
     );
 
 
-    try {
+    // Salva os dados do Pokémon no navegador do usuário
 
-        // Envia o Pokémon para o C#
-
-        const resposta =
-            await fetch(
-                "/api/tamagotchi/escolher",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body: JSON.stringify({
-
-                        pokemon:
-                            pokemonEscolhido.nome
-
-                    })
-                }
-            );
+    localStorage.setItem(
+        "pokemonEscolhido",
+        JSON.stringify(pokemonEscolhido)
+    );
 
 
-        // ==========================================
-        // SUCESSO
-        // ==========================================
+    // Redireciona para a tela do jogo
 
-        if (resposta.ok) {
-
-            // Vai para o Tamagotchi
-
-            window.location.href =
-                "jogo.html";
-
-        }
-
-
-        // ==========================================
-        // ERRO DO SERVIDOR
-        // ==========================================
-
-        else {
-
-            alert(
-                "Não foi possível salvar o Pokémon."
-            );
-
-        }
-
-    }
-
-
-    // ==========================================
-    // ERRO DE CONEXÃO
-    // ==========================================
-
-    catch (erro) {
-
-        console.error(
-            "Erro:",
-            erro
-        );
-
-
-        alert(
-            "Não foi possível conectar ao servidor."
-        );
-
-    }
+    window.location.href =
+        "jogo.html";
 }
 
 

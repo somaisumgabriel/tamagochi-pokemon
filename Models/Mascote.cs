@@ -9,9 +9,7 @@ namespace TamagotchiPokemon.Models
         // ==========================================
 
         public string Nome { get; set; } = string.Empty;
-
         public string Pokemon { get; set; } = string.Empty;
-
 
         // ==========================================
         // STATUS
@@ -36,15 +34,12 @@ namespace TamagotchiPokemon.Models
         // Vida do Pokémon
         public int Vida { get; set; } = 100;
 
-
         // ==========================================
         // EXPERIÊNCIA
         // ==========================================
 
         public int Nivel { get; set; } = 1;
-
         public int Experiencia { get; set; } = 0;
-
 
         // ==========================================
         // CONSTRUTORES
@@ -54,13 +49,11 @@ namespace TamagotchiPokemon.Models
         {
         }
 
-
         public Mascote(string nome, string pokemon)
         {
             Nome = nome;
             Pokemon = pokemon;
         }
-
 
         // ==========================================
         // ALIMENTAR
@@ -68,16 +61,12 @@ namespace TamagotchiPokemon.Models
 
         public void Alimentar()
         {
-            // Diminui a fome
             Fome = Math.Max(0, Fome - 20);
-
-            // Recupera um pouco de energia
             Energia = Math.Min(100, Energia + 10);
 
-            // Ganha experiência
-            GanharExperiencia(10);
+            // XP reduzido
+            GanharExperiencia(2);
         }
-
 
         // ==========================================
         // BRINCAR
@@ -85,19 +74,13 @@ namespace TamagotchiPokemon.Models
 
         public void Brincar()
         {
-            // Aumenta o humor
             Humor = Math.Min(100, Humor + 20);
-
-            // Gasta energia
             Energia = Math.Max(0, Energia - 15);
-
-            // Brincar deixa o Pokémon cansado
             Sono = Math.Min(100, Sono + 10);
 
-            // Ganha experiência
-            GanharExperiencia(15);
+            // XP reduzido
+            GanharExperiencia(3);
         }
-
 
         // ==========================================
         // DORMIR
@@ -105,19 +88,13 @@ namespace TamagotchiPokemon.Models
 
         public void Dormir()
         {
-            // Recupera energia
             Energia = 100;
-
-            // Remove o cansaço
             Sono = 0;
-
-            // Recupera um pouco de vida
             Vida = Math.Min(100, Vida + 10);
 
-            // Ganha experiência
-            GanharExperiencia(5);
+            // XP reduzido
+            GanharExperiencia(1);
         }
-
 
         // ==========================================
         // FAZER CARINHO
@@ -125,13 +102,11 @@ namespace TamagotchiPokemon.Models
 
         public void FazerCarinho()
         {
-            // Aumenta o humor
             Humor = Math.Min(100, Humor + 10);
 
-            // Ganha experiência
-            GanharExperiencia(5);
+            // XP reduzido
+            GanharExperiencia(1);
         }
-
 
         // ==========================================
         // DAR BANHO
@@ -139,16 +114,12 @@ namespace TamagotchiPokemon.Models
 
         public void DarBanho()
         {
-            // Aumenta o humor
             Humor = Math.Min(100, Humor + 5);
-
-            // Recupera um pouco de vida
             Vida = Math.Min(100, Vida + 5);
 
-            // Ganha experiência
-            GanharExperiencia(5);
+            // XP reduzido
+            GanharExperiencia(1);
         }
-
 
         // ==========================================
         // GANHAR EXPERIÊNCIA
@@ -158,22 +129,19 @@ namespace TamagotchiPokemon.Models
         {
             Experiencia += quantidade;
 
+            // XP necessário aumenta conforme o nível
+            int xpNecessario = 50 + ((Nivel - 1) * 25);
 
-            // Quando chegar em 100 XP
-            if (Experiencia >= 100)
+            if (Experiencia >= xpNecessario)
             {
-                Experiencia -= 100;
-
+                Experiencia -= xpNecessario;
                 Nivel++;
 
-                // Recupera um pouco de vida ao subir de nível
+                // Recupera tudo ao subir de nível
                 Vida = 100;
-
-                // Recupera energia
                 Energia = 100;
             }
         }
-
 
         // ==========================================
         // PASSAGEM DE TEMPO
@@ -181,28 +149,22 @@ namespace TamagotchiPokemon.Models
 
         public void PassarTempo()
         {
-            // O Pokémon fica um pouco mais faminto
+            // Fica mais faminto
             Fome = Math.Min(100, Fome + 1);
 
-            // O Pokémon fica um pouco mais cansado
+            // Fica mais cansado
             Sono = Math.Min(100, Sono + 1);
 
-            // A energia diminui
+            // Perde energia
             Energia = Math.Max(0, Energia - 1);
 
-
-            // Se estiver com muita fome,
-            // começa a perder vida.
-
+            // Se estiver com muita fome, perde vida
             if (Fome >= 90)
             {
                 Vida = Math.Max(0, Vida - 1);
             }
 
-
-            // Se estiver muito cansado,
-            // também perde um pouco de vida.
-
+            // Se estiver muito cansado, perde vida
             if (Sono >= 90)
             {
                 Vida = Math.Max(0, Vida - 1);

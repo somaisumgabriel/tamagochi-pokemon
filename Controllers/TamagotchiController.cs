@@ -11,25 +11,21 @@ namespace TamagotchiPokemon.Controllers
         // MASCOTE ATUAL DO JOGADOR
         // ==========================================
 
-        private static Mascote _mascote = new Mascote();
-
+        public static Mascote MascoteAtual { get; } = new Mascote();
 
         // ==========================================
         // PEGAR INFORMAÇÕES DO MASCOTE
-        //
         // GET: /api/tamagotchi
         // ==========================================
 
         [HttpGet]
         public IActionResult GetMascote()
         {
-            return Ok(_mascote);
+            return Ok(MascoteAtual);
         }
-
 
         // ==========================================
         // ESCOLHER POKÉMON
-        //
         // POST: /api/tamagotchi/escolher
         // ==========================================
 
@@ -37,156 +33,121 @@ namespace TamagotchiPokemon.Controllers
         public IActionResult EscolherPokemon(
             [FromBody] EscolhaPokemon escolha)
         {
-            // Verifica se recebeu um Pokémon
-
             if (
                 escolha == null ||
-                string.IsNullOrWhiteSpace(
-                    escolha.Pokemon
-                )
+                string.IsNullOrWhiteSpace(escolha.Pokemon)
             )
             {
                 return BadRequest(new
                 {
-                    mensagem =
-                        "Nenhum Pokémon foi escolhido."
+                    mensagem = "Nenhum Pokémon foi escolhido."
                 });
             }
 
-
-            // Salva o Pokémon
-
-            _mascote.Pokemon =
-                escolha.Pokemon;
-
-
-            // Por enquanto o nome
-            // será igual ao Pokémon
-
-            _mascote.Nome =
-                escolha.Pokemon;
-
+            MascoteAtual.Pokemon = escolha.Pokemon;
+            MascoteAtual.Nome = escolha.Pokemon;
 
             // Reseta os status
-            // quando um novo Pokémon é escolhido
+            MascoteAtual.Fome = 50;
+            MascoteAtual.Humor = 50;
+            MascoteAtual.Sono = 0;
+            MascoteAtual.Energia = 100;
+            MascoteAtual.Vida = 100;
+            MascoteAtual.Nivel = 1;
+            MascoteAtual.Experiencia = 0;
 
-            _mascote.Fome = 50;
-            _mascote.Humor = 50;
-            _mascote.Sono = 0;
-            _mascote.Energia = 100;
-            _mascote.Vida = 100;
-
-            _mascote.Nivel = 1;
-            _mascote.Experiencia = 0;
-
-
-            return Ok(_mascote);
+            return Ok(MascoteAtual);
         }
-
 
         // ==========================================
         // ALIMENTAR
-        //
         // POST: /api/tamagotchi/alimentar
         // ==========================================
 
         [HttpPost("alimentar")]
         public IActionResult Alimentar()
         {
-            _mascote.Alimentar();
+            MascoteAtual.Alimentar();
 
-            return Ok(_mascote);
+            return Ok(MascoteAtual);
         }
-
 
         // ==========================================
         // BRINCAR
-        //
         // POST: /api/tamagotchi/brincar
         // ==========================================
 
         [HttpPost("brincar")]
         public IActionResult Brincar()
         {
-            _mascote.Brincar();
+            MascoteAtual.Brincar();
 
-            return Ok(_mascote);
+            return Ok(MascoteAtual);
         }
-
 
         // ==========================================
         // DORMIR
-        //
         // POST: /api/tamagotchi/dormir
         // ==========================================
 
         [HttpPost("dormir")]
         public IActionResult Dormir()
         {
-            _mascote.Dormir();
+            MascoteAtual.Dormir();
 
-            return Ok(_mascote);
+            return Ok(MascoteAtual);
         }
-
 
         // ==========================================
         // FAZER CARINHO
-        //
         // POST: /api/tamagotchi/carinho
         // ==========================================
 
         [HttpPost("carinho")]
         public IActionResult FazerCarinho()
         {
-            _mascote.FazerCarinho();
+            MascoteAtual.FazerCarinho();
 
-            return Ok(_mascote);
+            return Ok(MascoteAtual);
         }
-
 
         // ==========================================
         // DAR BANHO
-        //
         // POST: /api/tamagotchi/banho
         // ==========================================
 
         [HttpPost("banho")]
         public IActionResult DarBanho()
         {
-            _mascote.DarBanho();
+            MascoteAtual.DarBanho();
 
-            return Ok(_mascote);
+            return Ok(MascoteAtual);
         }
-
 
         // ==========================================
         // PASSAGEM DE TEMPO
-        //
         // POST: /api/tamagotchi/tempo
         // ==========================================
 
         [HttpPost("tempo")]
         public IActionResult PassarTempo()
         {
-            _mascote.PassarTempo();
+            MascoteAtual.PassarTempo();
 
-            return Ok(_mascote);
+            return Ok(MascoteAtual);
         }
-
 
         // ==========================================
         // STATUS
-        //
         // GET: /api/tamagotchi/status
         // ==========================================
 
         [HttpGet("status")]
         public IActionResult Status()
         {
-            return Ok(_mascote);
+            return Ok(MascoteAtual);
         }
     }
-
 
     // ==========================================
     // CLASSE PARA RECEBER O POKÉMON ESCOLHIDO
@@ -194,7 +155,6 @@ namespace TamagotchiPokemon.Controllers
 
     public class EscolhaPokemon
     {
-        public string Pokemon { get; set; } =
-            string.Empty;
+        public string Pokemon { get; set; } = string.Empty;
     }
 }

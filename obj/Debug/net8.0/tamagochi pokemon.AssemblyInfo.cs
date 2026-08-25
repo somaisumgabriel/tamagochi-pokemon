@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("tamagochi pokemon")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23fd27203ba272aa732da9bf460d66549663a6f3")]
 [assembly: System.Reflection.AssemblyProductAttribute("tamagochi pokemon")]
 [assembly: System.Reflection.AssemblyTitleAttribute("tamagochi pokemon")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

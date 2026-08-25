@@ -18,25 +18,25 @@ const geracoes = {
         {
             nome: "Bulbasaur",
             numero: 1,
-            imagem: "images/pokemon/gen1/bulbasaur.png"
+            imagem: "images/pokemon/gen1/Bulbasauro.png"
         },
 
         {
             nome: "Charmander",
             numero: 4,
-            imagem: "images/pokemon/gen1/charmander.png"
+            imagem: "images/pokemon/gen1/Charmander.png"
         },
 
         {
             nome: "Squirtle",
             numero: 7,
-            imagem: "images/pokemon/gen1/squirtle.png"
+            imagem: "images/pokemon/gen1/Squirtle.png"
         },
 
         {
             nome: "Pikachu",
             numero: 25,
-            imagem: "images/pokemon/gen1/pikachu.png"
+            imagem: "images/pokemon/gen1/Pikachu.png"
         }
     ],
 
@@ -49,19 +49,19 @@ const geracoes = {
         {
             nome: "Chikorita",
             numero: 152,
-            imagem: "images/pokemon/gen2/chikorita.png"
+            imagem: "images/pokemon/gen2/Chicorita.png"
         },
 
         {
             nome: "Cyndaquil",
             numero: 155,
-            imagem: "images/pokemon/gen2/cyndaquil.png"
+            imagem: "images/pokemon/gen2/Cyndaquil.png"
         },
 
         {
             nome: "Totodile",
             numero: 158,
-            imagem: "images/pokemon/gen2/totodile.png"
+            imagem: "images/pokemon/gen2/Totodile.png"
         }
     ],
 
@@ -74,19 +74,19 @@ const geracoes = {
         {
             nome: "Treecko",
             numero: 252,
-            imagem: "images/pokemon/gen3/treecko.png"
+            imagem: "images/pokemon/gen3/Treecko.png"
         },
 
         {
             nome: "Torchic",
             numero: 255,
-            imagem: "images/pokemon/gen3/torchic.png"
+            imagem: "images/pokemon/gen3/Torchic.png"
         },
 
         {
             nome: "Mudkip",
             numero: 258,
-            imagem: "images/pokemon/gen3/mudkip.png"
+            imagem: "images/pokemon/gen3/Mudkip.png"
         }
     ],
 
@@ -99,19 +99,19 @@ const geracoes = {
         {
             nome: "Turtwig",
             numero: 387,
-            imagem: "images/pokemon/gen4/turtwig.png"
+            imagem: "images/pokemon/gen4/Turtwig.png"
         },
 
         {
             nome: "Chimchar",
             numero: 390,
-            imagem: "images/pokemon/gen4/chimchar.png"
+            imagem: "images/pokemon/gen4/Chimchar.png"
         },
 
         {
             nome: "Piplup",
             numero: 393,
-            imagem: "images/pokemon/gen4/piplup.png"
+            imagem: "images/pokemon/gen4/Piplup.png"
         }
     ],
 
@@ -124,19 +124,19 @@ const geracoes = {
         {
             nome: "Snivy",
             numero: 495,
-            imagem: "images/pokemon/gen5/snivy.png"
+            imagem: "images/pokemon/gen5/Snivy.png"
         },
 
         {
             nome: "Tepig",
             numero: 498,
-            imagem: "images/pokemon/gen5/tepig.png"
+            imagem: "images/pokemon/gen5/Tepig.png"
         },
 
         {
             nome: "Oshawott",
             numero: 501,
-            imagem: "images/pokemon/gen5/oshawott.png"
+            imagem: "images/pokemon/gen5/Oshawott.png"
         }
     ],
 
@@ -149,19 +149,19 @@ const geracoes = {
         {
             nome: "Chespin",
             numero: 650,
-            imagem: "images/pokemon/gen6/chespin.png"
+            imagem: "images/pokemon/gen6/Chespin.png"
         },
 
         {
             nome: "Fennekin",
             numero: 653,
-            imagem: "images/pokemon/gen6/fennekin.png"
+            imagem: "images/pokemon/gen6/Fennekin.png"
         },
 
         {
             nome: "Froakie",
             numero: 656,
-            imagem: "images/pokemon/gen6/froakie.png"
+            imagem: "images/pokemon/gen6/Froakie.png"
         }
     ],
 
@@ -174,19 +174,19 @@ const geracoes = {
         {
             nome: "Rowlet",
             numero: 722,
-            imagem: "images/pokemon/gen7/rowlet.png"
+            imagem: "images/pokemon/gen7/Rowlet.png"
         },
 
         {
             nome: "Litten",
             numero: 725,
-            imagem: "images/pokemon/gen7/litten.png"
+            imagem: "images/pokemon/gen7/Litten.png"
         },
 
         {
             nome: "Popplio",
             numero: 728,
-            imagem: "images/pokemon/gen7/popplio.png"
+            imagem: "images/pokemon/gen7/Popplio.png"
         }
     ],
 
@@ -199,19 +199,19 @@ const geracoes = {
         {
             nome: "Grookey",
             numero: 810,
-            imagem: "images/pokemon/gen8/grookey.png"
+            imagem: "images/pokemon/gen8/Grookey.png"
         },
 
         {
             nome: "Scorbunny",
             numero: 813,
-            imagem: "images/pokemon/gen8/scorbunny.png"
+            imagem: "images/pokemon/gen8/Scorbunny.png"
         },
 
         {
             nome: "Sobble",
             numero: 816,
-            imagem: "images/pokemon/gen8/sobble.png"
+            imagem: "images/pokemon/gen8/Sobble.png"
         }
     ],
 
@@ -224,19 +224,19 @@ const geracoes = {
         {
             nome: "Sprigatito",
             numero: 906,
-            imagem: "images/pokemon/gen9/sprigatito.png"
+            imagem: "images/pokemon/gen9/Sprigatito.png"
         },
 
         {
             nome: "Fuecoco",
             numero: 909,
-            imagem: "images/pokemon/gen9/fuecoco.png"
+            imagem: "images/pokemon/gen9/Fuecoco.png"
         },
 
         {
             nome: "Quaxly",
             numero: 912,
-            imagem: "images/pokemon/gen9/quaxly.png"
+            imagem: "images/pokemon/gen9/Quaxly.png"
         }
     ]
 

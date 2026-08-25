@@ -3,6 +3,10 @@
 // SISTEMA DE ESCOLHA DE POKÉMON
 // ==========================================
 
+// Função auxiliar para gerar URL da PokeAPI
+function getPokemonImageUrl(id) {
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+}
 
 // ==========================================
 // POKÉMON DISPONÍVEIS POR GERAÇÃO
@@ -18,25 +22,25 @@ const geracoes = {
         {
             nome: "Bulbasaur",
             numero: 1,
-            imagem: "images/pokemon/gen1/Bulbasauro.png"
+            imagem: getPokemonImageUrl(1)
         },
 
         {
             nome: "Charmander",
             numero: 4,
-            imagem: "images/pokemon/gen1/Charmander.png"
+            imagem: getPokemonImageUrl(4)
         },
 
         {
             nome: "Squirtle",
             numero: 7,
-            imagem: "images/pokemon/gen1/Squirtle.png"
+            imagem: getPokemonImageUrl(7)
         },
 
         {
             nome: "Pikachu",
             numero: 25,
-            imagem: "images/pokemon/gen1/Pikachu.png"
+            imagem: getPokemonImageUrl(25)
         }
     ],
 
@@ -49,19 +53,19 @@ const geracoes = {
         {
             nome: "Chikorita",
             numero: 152,
-            imagem: "images/pokemon/gen2/Chicorita.png"
+            imagem: getPokemonImageUrl(152)
         },
 
         {
             nome: "Cyndaquil",
             numero: 155,
-            imagem: "images/pokemon/gen2/Cyndaquil.png"
+            imagem: getPokemonImageUrl(155)
         },
 
         {
             nome: "Totodile",
             numero: 158,
-            imagem: "images/pokemon/gen2/Totodile.png"
+            imagem: getPokemonImageUrl(158)
         }
     ],
 
@@ -74,19 +78,19 @@ const geracoes = {
         {
             nome: "Treecko",
             numero: 252,
-            imagem: "images/pokemon/gen3/Treecko.png"
+            imagem: getPokemonImageUrl(252)
         },
 
         {
             nome: "Torchic",
             numero: 255,
-            imagem: "images/pokemon/gen3/Torchic.png"
+            imagem: getPokemonImageUrl(255)
         },
 
         {
             nome: "Mudkip",
             numero: 258,
-            imagem: "images/pokemon/gen3/Mudkip.png"
+            imagem: getPokemonImageUrl(258)
         }
     ],
 
@@ -99,19 +103,19 @@ const geracoes = {
         {
             nome: "Turtwig",
             numero: 387,
-            imagem: "images/pokemon/gen4/Turtwig.png"
+            imagem: getPokemonImageUrl(387)
         },
 
         {
             nome: "Chimchar",
             numero: 390,
-            imagem: "images/pokemon/gen4/Chimchar.png"
+            imagem: getPokemonImageUrl(390)
         },
 
         {
             nome: "Piplup",
             numero: 393,
-            imagem: "images/pokemon/gen4/Piplup.png"
+            imagem: getPokemonImageUrl(393)
         }
     ],
 
@@ -124,19 +128,19 @@ const geracoes = {
         {
             nome: "Snivy",
             numero: 495,
-            imagem: "images/pokemon/gen5/Snivy.png"
+            imagem: getPokemonImageUrl(495)
         },
 
         {
             nome: "Tepig",
             numero: 498,
-            imagem: "images/pokemon/gen5/Tepig.png"
+            imagem: getPokemonImageUrl(498)
         },
 
         {
             nome: "Oshawott",
             numero: 501,
-            imagem: "images/pokemon/gen5/Oshawott.png"
+            imagem: getPokemonImageUrl(501)
         }
     ],
 
@@ -149,19 +153,19 @@ const geracoes = {
         {
             nome: "Chespin",
             numero: 650,
-            imagem: "images/pokemon/gen6/Chespin.png"
+            imagem: getPokemonImageUrl(650)
         },
 
         {
             nome: "Fennekin",
             numero: 653,
-            imagem: "images/pokemon/gen6/Fennekin.png"
+            imagem: getPokemonImageUrl(653)
         },
 
         {
             nome: "Froakie",
             numero: 656,
-            imagem: "images/pokemon/gen6/Froakie.png"
+            imagem: getPokemonImageUrl(656)
         }
     ],
 
@@ -174,19 +178,19 @@ const geracoes = {
         {
             nome: "Rowlet",
             numero: 722,
-            imagem: "images/pokemon/gen7/Rowlet.png"
+            imagem: getPokemonImageUrl(722)
         },
 
         {
             nome: "Litten",
             numero: 725,
-            imagem: "images/pokemon/gen7/Litten.png"
+            imagem: getPokemonImageUrl(725)
         },
 
         {
             nome: "Popplio",
             numero: 728,
-            imagem: "images/pokemon/gen7/Popplio.png"
+            imagem: getPokemonImageUrl(728)
         }
     ],
 
@@ -199,19 +203,19 @@ const geracoes = {
         {
             nome: "Grookey",
             numero: 810,
-            imagem: "images/pokemon/gen8/Grookey.png"
+            imagem: getPokemonImageUrl(810)
         },
 
         {
             nome: "Scorbunny",
             numero: 813,
-            imagem: "images/pokemon/gen8/Scorbunny.png"
+            imagem: getPokemonImageUrl(813)
         },
 
         {
             nome: "Sobble",
             numero: 816,
-            imagem: "images/pokemon/gen8/Sobble.png"
+            imagem: getPokemonImageUrl(816)
         }
     ],
 
@@ -224,19 +228,19 @@ const geracoes = {
         {
             nome: "Sprigatito",
             numero: 906,
-            imagem: "images/pokemon/gen9/Sprigatito.png"
+            imagem: getPokemonImageUrl(906)
         },
 
         {
             nome: "Fuecoco",
             numero: 909,
-            imagem: "images/pokemon/gen9/Fuecoco.png"
+            imagem: getPokemonImageUrl(909)
         },
 
         {
             nome: "Quaxly",
             numero: 912,
-            imagem: "images/pokemon/gen9/Quaxly.png"
+            imagem: getPokemonImageUrl(912)
         }
     ]
 

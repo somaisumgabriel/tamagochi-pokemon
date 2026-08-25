@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #eef7ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background: #ffffff;
+    max-width: 450px;
+    width: 100%;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+#nomePokemon {
+    font-size: 20px;
+    font-weight: bold;
+    color: #4a4a4a;
+    margin-bottom: 10px;
+}
+
+.pokemon-display img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin: 10px 0;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.stat-card {
+    background: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+}
+
+.stat-card span {
+    font-size: 14px;
+    color: #6c757d;
+    display: block;
+}
+
+.stat-card strong {
+    font-size: 18px;
+    color: #212529;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+button {
+    background: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background: #357abd;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.btn-voltar {
+    background: #e0e0e0;
+    color: #333;
+    margin-top: 10px;
+}
+
+.btn-voltar:hover {
+    background: #d0d0d0;
+}

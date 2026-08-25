@@ -1,0 +1,2 @@
+C:\Users\gabri\Desktop\tamagochi pokemon\bin\Release\net10.0\win-x64\publish\tamagochi pokemon.pdb
+C:\Users\gabri\Desktop\tamagochi pokemon\bin\Release\net10.0\win-x64\publish\tamagochi pokemon.exe

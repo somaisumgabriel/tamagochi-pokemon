@@ -1,0 +1,17 @@
+C:\Users\gabri\Desktop\tamagochi pokemon\obj\Debug\net10.0\tamagochi pokemon.csproj.AssemblyReference.cache
+C:\Users\gabri\Desktop\tamagochi pokemon\obj\Debug\net10.0\tamagochi pokemon.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gabri\Desktop\tamagochi pokemon\obj\Debug\net10.0\tamagochi pokemon.AssemblyInfoInputs.cache
+C:\Users\gabri\Desktop\tamagochi pokemon\obj\Debug\net10.0\tamagochi pokemon.AssemblyInfo.cs
+C:\Users\gabri\Desktop\tamagochi pokemon\obj\Debug\net10.0\tamagochi pokemon.csproj.CoreCompileInputs.cache
+C:\Users\gabri\Desktop\tamagochi pokemon\bin\Debug\net10.0\tamagochi pokemon.exe
+C:\Users\gabri\Desktop\tamagochi pokemon\bin\Debug\net10.0\tamagochi pokemon.deps.json
+C:\Users\gabri\Desktop\tamagochi pokemon\bin\Debug\net10.0\tamagochi pokemon.runtimeconfig.json
+C:\Users\gabri\Desktop\tamagochi pokemon\bin\Debug\net10.0\tamagochi pokemon.dll
+C:\Users\gabri\Desktop\tamagochi pokemon\bin\Debug\net10.0\tamagochi pokemon.pdb
+C:\Users\gabri\Desktop\tamagochi pokemon\bin\Debug\net10.0\AutoMapper.dll
+C:\Users\gabri\Desktop\tamagochi pokemon\obj\Debug\net10.0\tamagoch.AD0A5AEB.Up2Date
+C:\Users\gabri\Desktop\tamagochi pokemon\obj\Debug\net10.0\tamagochi pokemon.dll
+C:\Users\gabri\Desktop\tamagochi pokemon\obj\Debug\net10.0\refint\tamagochi pokemon.dll
+C:\Users\gabri\Desktop\tamagochi pokemon\obj\Debug\net10.0\tamagochi pokemon.pdb
+C:\Users\gabri\Desktop\tamagochi pokemon\obj\Debug\net10.0\tamagochi pokemon.genruntimeconfig.cache
+C:\Users\gabri\Desktop\tamagochi pokemon\obj\Debug\net10.0\ref\tamagochi pokemon.dll

@@ -1,279 +1,117 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Meu Tamagotchi Pokémon</title>
-
-  <link rel="stylesheet" href="jogo.css">
-</head>
-
-<body>
-
-    <div class="tamagotchi">
-
-        <!-- TÍTULO -->
-
-        <header class="topo">
-
-            <h1>⚡ TAMAGOTCHI POKÉMON ⚡</h1>
-
-            <p id="nomePokemon">
-                Pikachu
-            </p>
-
-        </header>
-
-
-        <!-- ÁREA DO POKÉMON -->
-
-        <section class="area-pokemon">
-
-            <img
-                id="imagemPokemon"
-                src=""
-                alt="Seu Pokémon"
-            >
-
-        </section>
-
-
-        <!-- STATUS -->
-
-        <section class="status">
-
-            <div class="status-item">
-
-                <div class="status-nome">
-                    ❤️ Vida
-                </div>
-
-                <div class="barra">
-                    <div
-                        id="barraVida"
-                        class="barra-preenchida"
-                    ></div>
-                </div>
-
-                <span id="valorVida">
-                    100
-                </span>
-
-            </div>
-
-
-            <div class="status-item">
-
-                <div class="status-nome">
-                    🍖 Fome
-                </div>
-
-                <div class="barra">
-                    <div
-                        id="barraFome"
-                        class="barra-preenchida"
-                    ></div>
-                </div>
-
-                <span id="valorFome">
-                    50
-                </span>
-
-            </div>
-
-
-            <div class="status-item">
-
-                <div class="status-nome">
-                    😊 Humor
-                </div>
-
-                <div class="barra">
-                    <div
-                        id="barraHumor"
-                        class="barra-preenchida"
-                    ></div>
-                </div>
-
-                <span id="valorHumor">
-                    50
-                </span>
-
-            </div>
-
-
-            <div class="status-item">
-
-                <div class="status-nome">
-                    ⚡ Energia
-                </div>
-
-                <div class="barra">
-                    <div
-                        id="barraEnergia"
-                        class="barra-preenchida"
-                    ></div>
-                </div>
-
-                <span id="valorEnergia">
-                    100
-                </span>
-
-            </div>
-
-
-            <div class="status-item">
-
-                <div class="status-nome">
-                    💤 Sono
-                </div>
-
-                <div class="barra">
-                    <div
-                        id="barraSono"
-                        class="barra-preenchida"
-                    ></div>
-                </div>
-
-                <span id="valorSono">
-                    0
-                </span>
-
-            </div>
-
-        </section>
-
-
-        <!-- EXPERIÊNCIA -->
-
-        <section class="experiencia">
-
-            <div class="nivel">
-
-                ⭐ Nível
-                <span id="nivel">
-                    1
-                </span>
-
-            </div>
-
-            <div class="xp-texto">
-
-                XP:
-                <span id="experiencia">
-                    0
-                </span>
-                /100
-
-            </div>
-
-            <div class="barra xp">
-
-                <div
-                    id="barraXP"
-                    class="barra-preenchida"
-                ></div>
-
-            </div>
-
-        </section>
-
-
-        <!-- BOTÕES -->
-
-        <section class="acoes">
-
-            <button
-                onclick="alimentar()"
-                class="acao"
-            >
-
-                <span>🍖</span>
-
-                <small>Alimentar</small>
-
-            </button>
-
-
-            <button
-                onclick="brincar()"
-                class="acao"
-            >
-
-                <span>🎾</span>
-
-                <small>Brincar</small>
-
-            </button>
-
-
-            <button
-                onclick="dormir()"
-                class="acao"
-            >
-
-                <span>💤</span>
-
-                <small>Dormir</small>
-
-            </button>
-
-
-            <button
-                onclick="carinho()"
-                class="acao"
-            >
-
-                <span>❤️</span>
-
-                <small>Carinho</small>
-
-            </button>
-
-
-            <button
-                onclick="banho()"
-                class="acao"
-            >
-
-                <span>🚿</span>
-
-                <small>Banho</small>
-
-            </button>
-
-        </section>
-
-
-        <!-- MENSAGEM -->
-
-        <div id="mensagem" class="mensagem">
-
-            Seu Pokémon está esperando por você! ❤️
-
-        </div>
-
-
-        <!-- VOLTAR -->
-
-        <button
-            onclick="voltarEscolha()"
-            class="voltar"
-        >
-
-            ← Trocar Pokémon
-
-        </button>
-
-    </div>
-
-
-    <script src="jogo.js"></script>
-
-</body>
-
-</html>
+// Estado inicial do Pokémon
+let status = {
+    vida: 100,
+    fome: 50,
+    humor: 50,
+    energia: 100,
+    sono: 0,
+    nivel: 1,
+    xp: 0
+};
+
+// Elemento para exibir mensagens na tela
+const msgEl = document.getElementById("mensagem");
+
+// Carrega o Pokémon salvo no localStorage
+const pokemonSalvo = JSON.parse(localStorage.getItem("pokemonEscolhido"));
+if (pokemonSalvo) {
+    const elNome = document.getElementById("nomePokemon");
+    const elImg = document.getElementById("imagemPokemon");
+    
+    if (elNome) elNome.textContent = pokemonSalvo.nome;
+    if (elImg) elImg.src = pokemonSalvo.imagem;
+}
+
+// Atualiza os valores e as barras visuais no HTML
+function atualizarTela() {
+    // Atualiza os textos numéricos
+    setTex("valorVida", status.vida);
+    setTex("valorFome", status.fome);
+    setTex("valorHumor", status.humor);
+    setTex("valorEnergia", status.energia);
+    setTex("valorSono", status.sono);
+    setTex("nivel", status.nivel);
+    setTex("experiencia", status.xp);
+
+    // Atualiza o preenchimento das barras visuais (0% a 100%)
+    setBarra("barraVida", status.vida);
+    setBarra("barraFome", status.fome);
+    setBarra("barraHumor", status.humor);
+    setBarra("barraEnergia", status.energia);
+    setBarra("barraSono", status.sono);
+    setBarra("barraXP", status.xp);
+}
+
+function setTex(id, valor) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = valor;
+}
+
+function setBarra(id, valor) {
+    const el = document.getElementById(id);
+    if (el) el.style.width = Math.min(100, Math.max(0, valor)) + "%";
+}
+
+function exibirMensagem(texto) {
+    if (msgEl) msgEl.textContent = texto;
+}
+
+// Ações dos Botões
+function alimentar() {
+    status.fome = Math.max(0, status.fome - 20);
+    status.energia = Math.min(100, status.energia + 5);
+    exibirMensagem("Nham! Seu Pokémon se alimentou.");
+    ganharXP(10);
+    atualizarTela();
+}
+
+function brincar() {
+    if (status.energia < 15) {
+        exibirMensagem("Seu Pokémon está cansado demais para brincar!");
+        return;
+    }
+    status.humor = Math.min(100, status.humor + 20);
+    status.energia = Math.max(0, status.energia - 15);
+    status.fome = Math.min(100, status.fome + 10);
+    exibirMensagem("Que divertido! Vocês brincaram bastante.");
+    ganharXP(15);
+    atualizarTela();
+}
+
+function dormir() {
+    status.energia = 100;
+    status.sono = 0;
+    status.fome = Math.min(100, status.fome + 15);
+    exibirMensagem("Zzz... Seu Pokémon tirou uma soneca e recuperou as energias!");
+    atualizarTela();
+}
+
+function carinho() {
+    status.humor = Math.min(100, status.humor + 10);
+    exibirMensagem("Seu Pokémon adorou o carinho!");
+    ganharXP(5);
+    atualizarTela();
+}
+
+function banho() {
+    status.humor = Math.min(100, status.humor + 5);
+    exibirMensagem("Seu Pokémon está limpinho e cheiroso!");
+    ganharXP(5);
+    atualizarTela();
+}
+
+function ganharXP(qtd) {
+    status.xp += qtd;
+    if (status.xp >= 100) {
+        status.nivel += 1;
+        status.xp -= 100;
+        exibirMensagem(`Parabéns! Seu Pokémon subiu para o Nível ${status.nivel}! 🎉`);
+    }
+}
+
+function voltarEscolha() {
+    window.location.href = "index.html";
+}
+
+// Renderiza a interface inicial
+atualizarTela();

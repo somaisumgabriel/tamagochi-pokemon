@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PokéCare</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- TÍTULO -->
+        <header>
+            <h1>⚡ PokéCare ⚡</h1>
+            <p>Escolha seu Pokémon!</p>
+        </header>
+
+
+        <!-- ABAS DAS GERAÇÕES -->
+        <nav class="geracoes">
+
+            <button class="aba ativa" onclick="mostrarGeracao(1)">
+                Gen 1
+            </button>
+
+            <button class="aba" onclick="mostrarGeracao(2)">
+                Gen 2
+            </button>
+
+            <button class="aba" onclick="mostrarGeracao(3)">
+                Gen 3
+            </button>
+
+            <button class="aba" onclick="mostrarGeracao(4)">
+                Gen 4
+            </button>
+
+            <button class="aba" onclick="mostrarGeracao(5)">
+                Gen 5
+            </button>
+
+            <button class="aba" onclick="mostrarGeracao(6)">
+                Gen 6
+            </button>
+
+            <button class="aba" onclick="mostrarGeracao(7)">
+                Gen 7
+            </button>
+
+            <button class="aba" onclick="mostrarGeracao(8)">
+                Gen 8
+            </button>
+
+            <button class="aba" onclick="mostrarGeracao(9)">
+                Gen 9
+            </button>
+
+        </nav>
+
+
+        <!-- ÁREA DOS POKÉMON -->
+        <main>
+
+            <h2 id="tituloGeracao">
+                Geração 1
+            </h2>
+
+            <div id="listaPokemon" class="pokemon-grid">
+
+                <!-- Os Pokémon serão colocados pelo JavaScript -->
+
+            </div>
+
+        </main>
+
+
+        <!-- POKÉMON SELECIONADO -->
+        <section id="pokemonSelecionado" class="selecionado">
+
+            <h2>Seu Pokémon</h2>
+
+            <img
+                id="imagemSelecionado"
+                src=""
+                alt="Pokémon selecionado"
+            >
+
+            <h3 id="nomeSelecionado">
+                Nenhum Pokémon escolhido
+            </h3>
+
+            <button
+                id="botaoEscolher"
+                onclick="confirmarPokemon()"
+                disabled
+            >
+                Escolher Pokémon
+            </button>
+
+        </section>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

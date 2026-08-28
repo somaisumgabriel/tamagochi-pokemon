@@ -1,110 +1,209 @@
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+    height: 100%;
 }
 
 body {
-    background-color: #eef7ff;
+    margin: 0;
+    min-height: 100vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #d9f3ff;
+    color: #222;
 }
 
-.container {
-    background: #ffffff;
-    max-width: 450px;
-    width: 100%;
-    border-radius: 20px;
+/* ==========================================
+   CARTÃO PRINCIPAL
+   ========================================== */
+
+.jogo {
+    width: 430px;
+    max-width: 95%;
+
     padding: 25px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+    background: #fff;
+
+    border-radius: 30px;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+
     text-align: center;
 }
 
-h1 {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 15px;
+.jogo h1 {
+    margin: 0;
+    font-size: 23px;
 }
 
-#nomePokemon {
-    font-size: 20px;
+.jogo h2 {
+    margin: 8px 0 0;
+    font-size: 22px;
     font-weight: bold;
-    color: #4a4a4a;
-    margin-bottom: 10px;
 }
 
-.pokemon-display img {
-    width: 120px;
-    height: 120px;
-    object-fit: contain;
-    margin: 10px 0;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
-}
+/* ==========================================
+   IMAGEM DO POKÉMON
+   ========================================== */
 
-.stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+.pokemon-container {
+    height: 230px;
     margin: 20px 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #dff6ff;
+    border-radius: 20px;
+}
+
+.pokemon-container img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+/* ==========================================
+   STATUS
+   ========================================== */
+
+.status {
     text-align: left;
 }
 
-.stat-card {
-    background: #f8f9fa;
-    padding: 10px 15px;
-    border-radius: 12px;
-    border: 1px solid #e9ecef;
+.status-item {
+    margin-bottom: 13px;
+
+    display: grid;
+    grid-template-columns: 110px 1fr 40px;
+    gap: 8px;
+    align-items: center;
 }
 
-.stat-card span {
+.status-item span:first-child {
+    font-weight: bold;
     font-size: 14px;
-    color: #6c757d;
-    display: block;
 }
 
-.stat-card strong {
-    font-size: 18px;
-    color: #212529;
+.barra {
+    grid-column: 1 / -1;
+    height: 16px;
+
+    background: #ddd;
+    border-radius: 20px;
+    overflow: hidden;
+
+    order: 3;
 }
 
-.actions {
+.barra-preenchimento {
+    height: 100%;
+    width: 100%;
+
+    background: #55c76f;
+    border-radius: 20px;
+    transition: width 0.3s;
+}
+
+/* ==========================================
+   EXPERIÊNCIA
+   ========================================== */
+
+.experiencia {
+    margin-top: 20px;
+    padding: 15px;
+
+    background: #f5f5f5;
+    border-radius: 15px;
+}
+
+.experiencia h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+}
+
+.experiencia p {
+    margin: 0 0 7px;
+    font-size: 14px;
+}
+
+/* ==========================================
+   MENSAGEM
+   ========================================== */
+
+.mensagem {
+    margin-top: 20px;
+    padding: 12px;
+
+    background: #fff8d6;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+/* ==========================================
+   BOTÕES
+   ========================================== */
+
+.acoes {
+    margin-top: 20px;
+
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
     justify-content: center;
-    margin-bottom: 20px;
+    gap: 8px;
 }
 
-button {
-    background: #4a90e2;
-    color: white;
+.acoes button,
+.jogo > button {
+    padding: 10px 16px;
+
     border: none;
-    padding: 10px 14px;
-    border-radius: 10px;
-    font-weight: 600;
+    border-radius: 14px;
+
+    background: #3b82f6;
+    color: #fff;
+    font-weight: bold;
+
     cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
+    transition: 0.2s;
 }
 
-button:hover {
-    background: #357abd;
-    transform: translateY(-2px);
+.acoes button:hover,
+.jogo > button:hover {
+    transform: translateY(-3px);
+    background: #2563eb;
 }
 
-button:active {
-    transform: translateY(0);
+.jogo > button {
+    margin-top: 15px;
+    background: #ddd;
+    color: #222;
 }
 
-.btn-voltar {
-    background: #e0e0e0;
-    color: #333;
-    margin-top: 10px;
+.jogo > button:hover {
+    background: #ccc;
 }
 
-.btn-voltar:hover {
-    background: #d0d0d0;
+/* ==========================================
+   CELULAR
+   ========================================== */
+
+@media (max-width: 500px) {
+    .jogo {
+        padding: 18px;
+    }
+
+    .status-item {
+        grid-template-columns: 90px 1fr 30px;
+    }
 }

@@ -1,3 +1,56 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: linear-gradient(160deg, #cdeeff 0%, #eaf6ff 100%);
+    color: #222;
+}
+
+/* ==========================================
+   CARTÃO PRINCIPAL
+   ========================================== */
+
+.jogo {
+    width: 430px;
+    max-width: 95%;
+
+    padding: 28px;
+
+    background: #fff;
+
+    border-radius: 30px;
+
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+
+    text-align: center;
+}
+
+.jogo h1 {
+    margin: 0;
+    font-size: 25px;
+    letter-spacing: 0.5px;
+}
+
+.jogo h2 {
+    margin: 6px 0 0;
+    font-size: 21px;
+    font-weight: bold;
+    color: #333;
+}
 
 /* ==========================================
    NOME PERSONALIZADO
@@ -7,29 +60,190 @@
     border: none;
     background: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 15px;
     vertical-align: middle;
     margin-left: 4px;
-    padding: 2px 6px;
+    padding: 3px 7px;
     border-radius: 8px;
+    transition: 0.2s;
 }
 
 .btn-editar-nome:hover {
-    background: #eee;
+    background: #eef4ff;
 }
 
 /* ==========================================
-   BOTÃO EM COOLDOWN
+   IMAGEM DO POKÉMON
    ========================================== */
 
-.acoes button.em-cooldown {
-    background: #b7c3d0;
+.pokemon-container {
+    height: 220px;
+    margin: 20px 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: radial-gradient(circle, #e4f7ff 0%, #d3f0ff 100%);
+    border-radius: 20px;
+}
+
+.pokemon-container img {
+    width: 190px;
+    height: 190px;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+/* ==========================================
+   STATUS
+   ========================================== */
+
+.status {
+    text-align: left;
+}
+
+.status-item {
+    margin-bottom: 14px;
+
+    display: grid;
+    grid-template-columns: 110px 1fr 40px;
+    gap: 8px;
+    align-items: center;
+}
+
+.status-item span:first-child {
+    font-weight: bold;
+    font-size: 14px;
     color: #444;
+}
+
+.barra {
+    grid-column: 1 / -1;
+    height: 14px;
+
+    background: #e6e6e6;
+    border-radius: 20px;
+    overflow: hidden;
+
+    order: 3;
+}
+
+.barra-preenchimento {
+    height: 100%;
+    width: 100%;
+
+    background: linear-gradient(90deg, #6fdc8c, #3fbf68);
+    border-radius: 20px;
+    transition: width 0.3s;
+}
+
+/* ==========================================
+   EXPERIÊNCIA
+   ========================================== */
+
+.experiencia {
+    margin-top: 20px;
+    padding: 15px;
+
+    background: #f6f8fb;
+    border-radius: 15px;
+}
+
+.experiencia h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    color: #333;
+}
+
+.experiencia p {
+    margin: 0 0 7px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* ==========================================
+   MENSAGEM
+   ========================================== */
+
+.mensagem {
+    margin-top: 20px;
+    padding: 12px;
+
+    background: #fff8d6;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+/* ==========================================
+   BOTÕES
+   ========================================== */
+
+.acoes {
+    margin-top: 22px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.acoes button,
+.jogo > button {
+    padding: 10px 16px;
+
+    border: none;
+    border-radius: 14px;
+
+    background: #3b82f6;
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.acoes button:hover,
+.jogo > button:hover {
+    transform: translateY(-3px);
+    background: #2563eb;
+}
+
+.jogo > button {
+    margin-top: 16px;
+    background: #e2e6ea;
+    color: #333;
+}
+
+.jogo > button:hover {
+    background: #d3d8dd;
+}
+
+/* Botão em cooldown */
+.acoes button.em-cooldown {
+    background: #c2ccd6;
+    color: #555;
     cursor: not-allowed;
     transform: none;
+    font-size: 13px;
 }
 
 .acoes button.em-cooldown:hover {
-    background: #b7c3d0;
+    background: #c2ccd6;
     transform: none;
+}
+
+/* ==========================================
+   CELULAR
+   ========================================== */
+
+@media (max-width: 500px) {
+    .jogo {
+        padding: 18px;
+    }
+
+    .status-item {
+        grid-template-columns: 90px 1fr 30px;
+    }
 }

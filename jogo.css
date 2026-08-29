@@ -1,209 +1,35 @@
-* {
-    box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    min-height: 100vh;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-family: Arial, Helvetica, sans-serif;
-
-    background: #d9f3ff;
-    color: #222;
-}
 
 /* ==========================================
-   CARTÃO PRINCIPAL
+   NOME PERSONALIZADO
    ========================================== */
 
-.jogo {
-    width: 430px;
-    max-width: 95%;
-
-    padding: 25px;
-
-    background: #fff;
-
-    border-radius: 30px;
-
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-
-    text-align: center;
-}
-
-.jogo h1 {
-    margin: 0;
-    font-size: 23px;
-}
-
-.jogo h2 {
-    margin: 8px 0 0;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-/* ==========================================
-   IMAGEM DO POKÉMON
-   ========================================== */
-
-.pokemon-container {
-    height: 230px;
-    margin: 20px 0;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: #dff6ff;
-    border-radius: 20px;
-}
-
-.pokemon-container img {
-    width: 200px;
-    height: 200px;
-    object-fit: contain;
-    image-rendering: pixelated;
-}
-
-/* ==========================================
-   STATUS
-   ========================================== */
-
-.status {
-    text-align: left;
-}
-
-.status-item {
-    margin-bottom: 13px;
-
-    display: grid;
-    grid-template-columns: 110px 1fr 40px;
-    gap: 8px;
-    align-items: center;
-}
-
-.status-item span:first-child {
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.barra {
-    grid-column: 1 / -1;
-    height: 16px;
-
-    background: #ddd;
-    border-radius: 20px;
-    overflow: hidden;
-
-    order: 3;
-}
-
-.barra-preenchimento {
-    height: 100%;
-    width: 100%;
-
-    background: #55c76f;
-    border-radius: 20px;
-    transition: width 0.3s;
-}
-
-/* ==========================================
-   EXPERIÊNCIA
-   ========================================== */
-
-.experiencia {
-    margin-top: 20px;
-    padding: 15px;
-
-    background: #f5f5f5;
-    border-radius: 15px;
-}
-
-.experiencia h3 {
-    margin: 0 0 8px;
-    font-size: 16px;
-}
-
-.experiencia p {
-    margin: 0 0 7px;
-    font-size: 14px;
-}
-
-/* ==========================================
-   MENSAGEM
-   ========================================== */
-
-.mensagem {
-    margin-top: 20px;
-    padding: 12px;
-
-    background: #fff8d6;
-    border-radius: 12px;
-    font-size: 14px;
-}
-
-/* ==========================================
-   BOTÕES
-   ========================================== */
-
-.acoes {
-    margin-top: 20px;
-
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-}
-
-.acoes button,
-.jogo > button {
-    padding: 10px 16px;
-
+.btn-editar-nome {
     border: none;
-    border-radius: 14px;
-
-    background: #3b82f6;
-    color: #fff;
-    font-weight: bold;
-
+    background: none;
     cursor: pointer;
-    transition: 0.2s;
+    font-size: 16px;
+    vertical-align: middle;
+    margin-left: 4px;
+    padding: 2px 6px;
+    border-radius: 8px;
 }
 
-.acoes button:hover,
-.jogo > button:hover {
-    transform: translateY(-3px);
-    background: #2563eb;
-}
-
-.jogo > button {
-    margin-top: 15px;
-    background: #ddd;
-    color: #222;
-}
-
-.jogo > button:hover {
-    background: #ccc;
+.btn-editar-nome:hover {
+    background: #eee;
 }
 
 /* ==========================================
-   CELULAR
+   BOTÃO EM COOLDOWN
    ========================================== */
 
-@media (max-width: 500px) {
-    .jogo {
-        padding: 18px;
-    }
+.acoes button.em-cooldown {
+    background: #b7c3d0;
+    color: #444;
+    cursor: not-allowed;
+    transform: none;
+}
 
-    .status-item {
-        grid-template-columns: 90px 1fr 30px;
-    }
+.acoes button.em-cooldown:hover {
+    background: #b7c3d0;
+    transform: none;
 }

@@ -20,7 +20,10 @@
 
         <h1>PokéCare</h1>
 
-        <h2 id="nomePokemon">Meu Pokémon</h2>
+        <h2>
+            <span id="nomePokemon">Meu Pokémon</span>
+            <button id="btnEditarNome" class="btn-editar-nome" title="Renomear seu Pokémon">✏️</button>
+        </h2>
 
 
         <!-- ========================================== -->
@@ -152,23 +155,23 @@
 
         <section class="acoes">
 
-            <button onclick="alimentar()">
+            <button id="btn-alimentar" onclick="alimentar()">
                 🍖 Alimentar
             </button>
 
-            <button onclick="brincar()">
+            <button id="btn-brincar" onclick="brincar()">
                 🎾 Brincar
             </button>
 
-            <button onclick="dormir()">
+            <button id="btn-dormir" onclick="dormir()">
                 💤 Dormir
             </button>
 
-            <button onclick="carinho()">
+            <button id="btn-carinho" onclick="carinho()">
                 ❤️ Carinho
             </button>
 
-            <button onclick="banho()">
+            <button id="btn-banho" onclick="banho()">
                 🚿 Banho
             </button>
 
@@ -190,7 +193,7 @@
     <!-- JAVASCRIPT -->
     <!-- ========================================== -->
 
-    <script src="script.js"></script>
+    <script src="jogo.js"></script>
 
 </body>
 

@@ -353,3 +353,25 @@ body {
     }
 
 }
+
+/* ==========================================
+   BOTÃO BATALHA
+   ========================================== */
+
+.acoes .batalha {
+    display: flex !important;
+
+    align-items: center;
+
+    justify-content: center;
+
+    visibility: visible !important;
+
+    opacity: 1 !important;
+
+    background: #ef4444 !important;
+}
+
+.acoes .batalha:hover {
+    background: #dc2626 !important;
+}

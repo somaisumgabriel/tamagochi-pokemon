@@ -1,0 +1,664 @@
+
+/* ==========================================
+   POKÉCARE - BATALHA
+   ========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #1b1b2f;
+    color: white;
+    min-height: 100vh;
+}
+
+
+/* ==========================================
+   CONTAINER
+   ========================================== */
+
+.battle-container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ==========================================
+   CABEÇALHO
+   ========================================== */
+
+.battle-header {
+    height: 70px;
+    background: #25254a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    border-bottom: 3px solid #444477;
+}
+
+.battle-header h1 {
+    font-size: 25px;
+}
+
+#voltarBtn {
+    background: #444477;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+#voltarBtn:hover {
+    background: #5b5b9c;
+    transform: scale(1.05);
+}
+
+
+/* ==========================================
+   CAMPO DE BATALHA
+   ========================================== */
+
+.battle-field {
+    flex: 1;
+    min-height: 600px;
+    position: relative;
+    padding: 30px;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #4b4b68 0%,
+            #292943 45%,
+            #151525 100%
+        );
+}
+
+
+/* ==========================================
+   ÁREA DO INIMIGO
+   ========================================== */
+
+.pokemon-enemy {
+    position: absolute;
+    top: 45px;
+    right: 8%;
+    width: 360px;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.enemy-image {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+
+    image-rendering: pixelated;
+
+    filter: drop-shadow(0 12px 5px rgba(0, 0, 0, 0.4));
+
+    animation: enemyFloat 2s ease-in-out infinite;
+}
+
+@keyframes enemyFloat {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+/* ==========================================
+   ÁREA DO JOGADOR
+   ========================================== */
+
+.pokemon-player {
+    position: absolute;
+    bottom: 40px;
+    left: 8%;
+    width: 400px;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.player-image {
+    width: 210px;
+    height: 210px;
+    object-fit: contain;
+
+    image-rendering: pixelated;
+
+    filter: drop-shadow(0 15px 5px rgba(0, 0, 0, 0.5));
+
+    animation: playerFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes playerFloat {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+/* ==========================================
+   INFORMAÇÕES DO POKÉMON
+   ========================================== */
+
+.pokemon-info {
+    background: #202035;
+    border: 2px solid #68688f;
+    border-radius: 14px;
+
+    padding: 15px;
+
+    min-width: 190px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.pokemon-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 10px;
+}
+
+.pokemon-name h2 {
+    font-size: 20px;
+}
+
+.pokemon-name span {
+    font-size: 13px;
+    color: #c9c9e8;
+}
+
+
+/* ==========================================
+   BARRA DE HP
+   ========================================== */
+
+.hp-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    font-size: 12px;
+}
+
+.hp-container > span:first-child {
+    color: #a9a9c9;
+    font-weight: bold;
+}
+
+.hp-bar {
+    width: 100%;
+    height: 12px;
+
+    background: #11111d;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    border: 1px solid #55556e;
+}
+
+.hp-fill {
+    height: 100%;
+    width: 100%;
+
+    background: #54d66f;
+
+    border-radius: 20px;
+
+    transition: width 0.4s ease;
+}
+
+#enemyHp {
+    background: #e85d5d;
+}
+
+.hp-container > span:last-child {
+    text-align: right;
+    color: #dddddd;
+}
+
+
+/* ==========================================
+   CENTRO DA BATALHA
+   ========================================== */
+
+.battle-center {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 520px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* ==========================================
+   MENSAGEM
+   ========================================== */
+
+.battle-message {
+    background: rgba(20, 20, 35, 0.95);
+
+    border: 2px solid #7777a5;
+
+    border-radius: 12px;
+
+    padding: 15px 25px;
+
+    width: 100%;
+
+    text-align: center;
+
+    margin-bottom: 20px;
+
+    font-size: 16px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+
+/* ==========================================
+   QTE
+   ========================================== */
+
+.qte-area {
+    width: 100%;
+
+    background: rgba(25, 25, 45, 0.95);
+
+    border: 2px solid #7777a5;
+
+    border-radius: 15px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.qte-area h3 {
+    margin-bottom: 8px;
+}
+
+.qte-area p {
+    font-size: 13px;
+
+    color: #cfcfe8;
+
+    margin-bottom: 18px;
+}
+
+
+/* ==========================================
+   BARRA DO QTE
+   ========================================== */
+
+.qte-bar {
+    position: relative;
+
+    width: 100%;
+    height: 30px;
+
+    background: #11111c;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    border: 2px solid #55556f;
+}
+
+
+/* Área de acerto */
+
+.qte-target {
+    position: absolute;
+
+    left: 40%;
+    width: 20%;
+
+    height: 100%;
+
+    background: #65d66f;
+
+    box-shadow:
+        0 0 15px rgba(100, 220, 110, 0.8);
+}
+
+
+/* Marcador */
+
+.qte-marker {
+    position: absolute;
+
+    left: 0;
+
+    top: 0;
+
+    width: 8px;
+
+    height: 100%;
+
+    background: white;
+
+    box-shadow:
+        0 0 10px white;
+
+    transform: translateX(0);
+}
+
+
+/* ==========================================
+   BOTÃO QTE
+   ========================================== */
+
+.qte-button {
+    margin-top: 18px;
+
+    width: 180px;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #f4c542;
+
+    color: #202020;
+
+    font-weight: bold;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.15s;
+}
+
+.qte-button:hover {
+    transform: scale(1.05);
+
+    background: #ffd95c;
+}
+
+.qte-button:active {
+    transform: scale(0.95);
+}
+
+
+/* ==========================================
+   CONTROLES
+   ========================================== */
+
+.battle-controls {
+    height: 100px;
+
+    background: #25254a;
+
+    border-top: 3px solid #444477;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 15px;
+}
+
+.battle-button {
+    min-width: 150px;
+
+    padding: 15px 25px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.battle-button:hover {
+    transform: translateY(-3px);
+}
+
+.battle-button:active {
+    transform: scale(0.95);
+}
+
+.attack {
+    background: #d84f4f;
+}
+
+.defend {
+    background: #4f78d8;
+}
+
+.run {
+    background: #777777;
+}
+
+
+/* ==========================================
+   RESULTADO
+   ========================================== */
+
+.battle-result {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 100;
+}
+
+.hidden {
+    display: none;
+}
+
+.result-box {
+    width: 400px;
+
+    padding: 35px;
+
+    background: #292943;
+
+    border: 3px solid #7777a5;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+
+    animation: resultAppear 0.3s ease;
+}
+
+@keyframes resultAppear {
+
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.result-box h2 {
+    font-size: 32px;
+
+    margin-bottom: 15px;
+}
+
+.result-box p {
+    margin: 10px 0;
+
+    color: #dddddd;
+}
+
+#xpReward {
+    font-size: 20px;
+
+    color: #ffd95c;
+
+    font-weight: bold;
+}
+
+#continueBtn {
+    margin-top: 20px;
+
+    padding: 12px 30px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #65d66f;
+
+    color: #152015;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+#continueBtn:hover {
+    transform: scale(1.05);
+}
+
+
+/* ==========================================
+   RESPONSIVO
+   ========================================== */
+
+@media (max-width: 900px) {
+
+    .pokemon-enemy {
+        right: 3%;
+        width: 300px;
+    }
+
+    .pokemon-player {
+        left: 3%;
+        width: 330px;
+    }
+
+    .enemy-image {
+        width: 140px;
+        height: 140px;
+    }
+
+    .player-image {
+        width: 160px;
+        height: 160px;
+    }
+
+    .battle-center {
+        width: 430px;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .battle-field {
+        min-height: 700px;
+    }
+
+    .pokemon-enemy {
+        top: 20px;
+        right: 20px;
+    }
+
+    .pokemon-player {
+        bottom: 20px;
+        left: 20px;
+    }
+
+    .battle-center {
+        width: 90%;
+        top: 50%;
+    }
+
+    .pokemon-info {
+        min-width: 150px;
+    }
+
+    .battle-controls {
+        flex-wrap: wrap;
+        height: auto;
+    }
+
+    .battle-button {
+        min-width: 110px;
+        padding: 12px;
+    }
+}

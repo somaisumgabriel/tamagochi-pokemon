@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PokéCare - Batalha</title>
+
+    <link rel="stylesheet" href="batalha.css">
+</head>
+
+<body>
+
+    <div class="battle-container">
+
+        <!-- CABEÇALHO -->
+        <header class="battle-header">
+            <h1>⚔️ BATALHA POKÉMON</h1>
+            <button id="voltarBtn">← Voltar</button>
+        </header>
+
+
+        <!-- CAMPO DE BATALHA -->
+        <main class="battle-field">
+
+            <!-- INIMIGO -->
+            <section class="pokemon-enemy">
+
+                <div class="pokemon-info">
+
+                    <div class="pokemon-name">
+                        <h2 id="enemyName">Rattata</h2>
+                        <span id="enemyLevel">Lv. 5</span>
+                    </div>
+
+                    <div class="hp-container">
+                        <span>HP</span>
+
+                        <div class="hp-bar">
+                            <div id="enemyHp" class="hp-fill"></div>
+                        </div>
+
+                        <span id="enemyHpText">80 / 80</span>
+                    </div>
+
+                </div>
+
+                <img
+                    id="enemyImage"
+                    class="enemy-image"
+                    src="images/pokemon/gen1/rattata.png"
+                    alt="Pokémon inimigo"
+                >
+
+            </section>
+
+
+            <!-- CENTRO DO CAMPO -->
+            <section class="battle-center">
+
+                <div id="battleMessage" class="battle-message">
+                    Um Pokémon selvagem apareceu!
+                </div>
+
+                <!-- QTE -->
+                <div id="qteArea" class="qte-area">
+
+                    <h3>⚡ QUICK TIME EVENT ⚡</h3>
+
+                    <p id="qteInstruction">
+                        Aperte ESPAÇO quando o marcador estiver na área verde!
+                    </p>
+
+                    <div class="qte-bar">
+
+                        <div class="qte-target"></div>
+
+                        <div
+                            id="qteMarker"
+                            class="qte-marker">
+                        </div>
+
+                    </div>
+
+                    <button id="qteButton" class="qte-button">
+                        APERTAR!
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- SEU POKÉMON -->
+            <section class="pokemon-player">
+
+                <img
+                    id="playerImage"
+                    class="player-image"
+                    src="images/pokemon/gen1/pikachu.png"
+                    alt="Seu Pokémon"
+                >
+
+                <div class="pokemon-info">
+
+                    <div class="pokemon-name">
+                        <h2 id="playerName">Pikachu</h2>
+                        <span id="playerLevel">Lv. 5</span>
+                    </div>
+
+                    <div class="hp-container">
+                        <span>HP</span>
+
+                        <div class="hp-bar">
+                            <div id="playerHp" class="hp-fill"></div>
+                        </div>
+
+                        <span id="playerHpText">100 / 100</span>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <!-- CONTROLES -->
+        <footer class="battle-controls">
+
+            <button id="attackBtn" class="battle-button attack">
+                ⚔️ ATACAR
+            </button>
+
+            <button id="defendBtn" class="battle-button defend">
+                🛡️ DEFENDER
+            </button>
+
+            <button id="runBtn" class="battle-button run">
+                🏃 FUGIR
+            </button>
+
+        </footer>
+
+
+        <!-- RESULTADO -->
+        <div id="battleResult" class="battle-result hidden">
+
+            <div class="result-box">
+
+                <h2 id="resultTitle">
+                    Vitória!
+                </h2>
+
+                <p id="resultMessage">
+                    Você derrotou o Pokémon inimigo!
+                </p>
+
+                <p id="xpReward">
+                    ⭐ +50 XP
+                </p>
+
+                <button id="continueBtn">
+                    CONTINUAR
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="batalha.js"></script>
+
+</body>
+</html>
+

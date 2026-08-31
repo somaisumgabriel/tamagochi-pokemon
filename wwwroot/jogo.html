@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Meu Tamagotchi Pokémon</title>
+    <title>PokéCare</title>
 
     <link rel="stylesheet" href="jogo.css">
 
@@ -17,7 +17,9 @@
 
     <div class="tamagotchi">
 
-        <!-- TÍTULO -->
+        <!-- ==========================================
+             TÍTULO
+             ========================================== -->
 
         <header class="topo">
 
@@ -30,7 +32,9 @@
         </header>
 
 
-        <!-- ÁREA DO POKÉMON -->
+        <!-- ==========================================
+             ÁREA DO POKÉMON
+             ========================================== -->
 
         <section class="area-pokemon">
 
@@ -43,9 +47,13 @@
         </section>
 
 
-        <!-- STATUS -->
+        <!-- ==========================================
+             STATUS
+             ========================================== -->
 
         <section class="status">
+
+            <!-- VIDA -->
 
             <div class="status-item">
 
@@ -69,6 +77,8 @@
             </div>
 
 
+            <!-- FOME -->
+
             <div class="status-item">
 
                 <div class="status-nome">
@@ -90,6 +100,8 @@
 
             </div>
 
+
+            <!-- HUMOR -->
 
             <div class="status-item">
 
@@ -113,6 +125,8 @@
             </div>
 
 
+            <!-- ENERGIA -->
+
             <div class="status-item">
 
                 <div class="status-nome">
@@ -134,6 +148,8 @@
 
             </div>
 
+
+            <!-- SONO -->
 
             <div class="status-item">
 
@@ -159,7 +175,9 @@
         </section>
 
 
-        <!-- EXPERIÊNCIA -->
+        <!-- ==========================================
+             EXPERIÊNCIA
+             ========================================== -->
 
         <section class="experiencia">
 
@@ -199,9 +217,12 @@
         </section>
 
 
-        <!-- BOTÕES -->
+        <!-- ==========================================
+             BOTÕES DE AÇÃO
+             ========================================== -->
 
         <section class="acoes">
+
 
             <!-- ALIMENTAR -->
 
@@ -277,7 +298,7 @@
 
             <button
                 onclick="window.location.href='batalha.html'"
-                class="acao"
+                class="acao batalha"
             >
 
                 <span>⚔️</span>
@@ -286,10 +307,13 @@
 
             </button>
 
+
         </section>
 
 
-        <!-- MENSAGEM -->
+        <!-- ==========================================
+             MENSAGEM
+             ========================================== -->
 
         <div
             id="mensagem"
@@ -301,7 +325,9 @@
         </div>
 
 
-        <!-- VOLTAR -->
+        <!-- ==========================================
+             TROCAR POKÉMON
+             ========================================== -->
 
         <button
             onclick="voltarEscolha()"
@@ -312,8 +338,13 @@
 
         </button>
 
+
     </div>
 
+
+    <!-- ==========================================
+         JAVASCRIPT
+         ========================================== -->
 
     <script src="jogo.js"></script>
 

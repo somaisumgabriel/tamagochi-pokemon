@@ -144,6 +144,31 @@ namespace TamagotchiPokemon.Models
         }
 
         // ==========================================
+        // RESULTADO DE BATALHA
+        // ==========================================
+
+        public void RegistrarResultadoBatalha(bool venceu, int danoRecebido)
+        {
+            // Aplica o dano que o Pokémon sofreu durante a luta
+            Vida = Math.Max(0, Vida - danoRecebido);
+
+            // Batalhar cansa
+            Energia = Math.Max(0, Energia - 10);
+
+            if (venceu)
+            {
+                Humor = Math.Min(100, Humor + 15);
+
+                // XP maior por vencer uma batalha
+                GanharExperiencia(15);
+            }
+            else
+            {
+                Humor = Math.Max(0, Humor - 10);
+            }
+        }
+
+        // ==========================================
         // PASSAGEM DE TEMPO
         // ==========================================
 

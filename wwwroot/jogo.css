@@ -1,0 +1,691 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #d9f3ff;
+
+    color: #222;
+}
+
+
+/* ==========================================
+   TAMAGOTCHI
+   ========================================== */
+
+.tamagotchi {
+
+    width: 430px;
+
+    max-width: 95%;
+
+    padding: 25px;
+
+    background: #fff;
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.2);
+
+    text-align: center;
+}
+
+
+/* ==========================================
+   TOPO
+   ========================================== */
+
+.topo h1 {
+
+    margin: 0;
+
+    font-size: 23px;
+
+}
+
+.topo p {
+
+    margin: 8px 0 0;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+}
+
+
+/* ==========================================
+   ÁREA DO POKÉMON
+   ========================================== */
+
+.area-pokemon {
+
+    height: 230px;
+
+    margin: 20px 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #dff6ff;
+
+    border-radius: 20px;
+
+}
+
+
+.area-pokemon img {
+
+    width: 200px;
+
+    height: 200px;
+
+    object-fit: contain;
+
+    image-rendering: pixelated;
+
+}
+
+
+/* ==========================================
+   STATUS
+   ========================================== */
+
+.status {
+
+    text-align: left;
+
+}
+
+.status-item {
+
+    margin-bottom: 13px;
+
+    display: grid;
+
+    grid-template-columns: 100px 1fr 35px;
+
+    gap: 8px;
+
+    align-items: center;
+
+}
+
+.status-nome {
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+}
+
+
+/* ==========================================
+   BARRAS
+   ========================================== */
+
+.barra {
+
+    height: 16px;
+
+    background: #ddd;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+}
+
+.barra-preenchida {
+
+    height: 100%;
+
+    width: 100%;
+
+    background: #55c76f;
+
+    border-radius: 20px;
+
+    transition: width 0.3s;
+
+}
+
+
+/* ==========================================
+   XP
+   ========================================== */
+
+.experiencia {
+
+    margin-top: 20px;
+
+    padding: 15px;
+
+    background: #f5f5f5;
+
+    border-radius: 15px;
+
+}
+
+.nivel {
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+}
+
+.xp-texto {
+
+    font-size: 14px;
+
+    margin-bottom: 7px;
+
+}
+
+.xp {
+
+    height: 12px;
+
+}
+
+.xp .barra-preenchida {
+
+    background: #8b5cf6;
+
+}
+
+
+/* ==========================================
+   BOTÕES
+   ========================================== */
+
+.acoes {
+
+    margin-top: 20px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 8px;
+
+}
+
+
+.acao {
+
+    padding: 12px 5px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: #f1f1f1;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.acao:hover {
+
+    transform: translateY(-4px);
+
+    background: #ffcb05;
+
+}
+
+
+.acao span {
+
+    display: block;
+
+    font-size: 25px;
+
+}
+
+
+.acao small {
+
+    display: block;
+
+    margin-top: 5px;
+
+    font-weight: bold;
+
+}
+
+
+/* ==========================================
+   MENSAGEM
+   ========================================== */
+
+.mensagem {
+
+    margin-top: 20px;
+
+    padding: 12px;
+
+    background: #fff8d6;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+
+}
+
+
+/* ==========================================
+   VOLTAR
+   ========================================== */
+
+.voltar {
+
+    margin-top: 15px;
+
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #ddd;
+
+    cursor: pointer;
+
+}
+
+.voltar:hover {
+
+    background: #ccc;
+
+}
+
+
+/* ==========================================
+   CELULAR
+   ========================================== */
+
+@media (max-width: 500px) {
+
+    .tamagotchi {
+
+        padding: 18px;
+
+    }
+
+    .acoes {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+    }
+
+    .status-item {
+
+        grid-template-columns:
+            90px 1fr 30px;
+
+    }
+
+}/* ==========================================
+   TAMAGOTCHI POKÉMON
+   ESTILO DA TELA PRINCIPAL
+   ========================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #d9f3ff;
+    color: #222;
+}
+
+
+/* ==========================================
+   TAMAGOTCHI
+   ========================================== */
+
+.tamagotchi {
+    width: 430px;
+    max-width: 95%;
+
+    padding: 25px;
+
+    background: white;
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.2);
+
+    text-align: center;
+}
+
+
+/* ==========================================
+   TOPO
+   ========================================== */
+
+.topo h1 {
+    margin: 0;
+
+    font-size: 23px;
+}
+
+.topo p {
+    margin: 8px 0 0;
+
+    font-size: 22px;
+
+    font-weight: bold;
+}
+
+
+/* ==========================================
+   ÁREA DO POKÉMON
+   ========================================== */
+
+.area-pokemon {
+    height: 230px;
+
+    margin: 20px 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background: #dff6ff;
+
+    border-radius: 20px;
+}
+
+
+/* ==========================================
+   IMAGEM DO POKÉMON
+   ========================================== */
+
+.area-pokemon img {
+    width: 200px;
+    height: 200px;
+
+    object-fit: contain;
+
+    image-rendering: pixelated;
+}
+
+
+/* ==========================================
+   STATUS
+   ========================================== */
+
+.status {
+    text-align: left;
+}
+
+.status-item {
+    margin-bottom: 13px;
+
+    display: grid;
+
+    grid-template-columns: 100px 1fr 35px;
+
+    gap: 8px;
+
+    align-items: center;
+}
+
+.status-nome {
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   BARRAS
+   ========================================== */
+
+.barra {
+    height: 16px;
+
+    background: #ddd;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.barra-preenchida {
+    height: 100%;
+
+    width: 100%;
+
+    background: #55c76f;
+
+    border-radius: 20px;
+
+    transition: width 0.3s;
+}
+
+
+/* ==========================================
+   EXPERIÊNCIA
+   ========================================== */
+
+.experiencia {
+    margin-top: 20px;
+
+    padding: 15px;
+
+    background: #f5f5f5;
+
+    border-radius: 15px;
+}
+
+.nivel {
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+.xp-texto {
+    font-size: 14px;
+
+    margin-bottom: 7px;
+}
+
+.xp {
+    height: 12px;
+}
+
+.xp .barra-preenchida {
+    background: #8b5cf6;
+}
+
+
+/* ==========================================
+   BOTÕES DE AÇÃO
+   ========================================== */
+
+.acoes {
+    margin-top: 20px;
+
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 8px;
+}
+
+.acao {
+    padding: 12px 5px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: #f1f1f1;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.acao:hover {
+    transform: translateY(-4px);
+
+    background: #ffcb05;
+}
+
+.acao span {
+    display: block;
+
+    font-size: 25px;
+}
+
+.acao small {
+    display: block;
+
+    margin-top: 5px;
+
+    font-weight: bold;
+}
+
+
+/* ==========================================
+   MENSAGEM
+   ========================================== */
+
+.mensagem {
+    margin-top: 20px;
+
+    padding: 12px;
+
+    background: #fff8d6;
+
+    border-radius: 12px;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   BOTÃO VOLTAR
+   ========================================== */
+
+.voltar {
+    margin-top: 15px;
+
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #ddd;
+
+    cursor: pointer;
+}
+
+.voltar:hover {
+    background: #ccc;
+}
+
+
+/* ==========================================
+   CELULAR
+   ========================================== */
+
+@media (max-width: 500px) {
+
+    .tamagotchi {
+        padding: 18px;
+    }
+
+    .acoes {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .status-item {
+        grid-template-columns: 90px 1fr 30px;
+    }
+}
+
+
+/* ==========================================
+   ABAS DE NAVEGAÇÃO (CUIDAR / BATALHA)
+   ========================================== */
+
+.nav-abas {
+    margin: 16px 0 4px;
+
+    display: flex;
+    gap: 8px;
+}
+
+.nav-aba {
+    flex: 1;
+
+    padding: 10px 5px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #f1f1f1;
+
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 13px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.nav-aba:hover {
+    transform: translateY(-2px);
+}
+
+.nav-aba.ativa {
+    background: #ffcb05;
+}
+
+.nav-aba-batalha {
+    background: #ffe1dc;
+}
+
+.nav-aba-batalha:hover {
+    background: #ff8a72;
+    color: #fff;
+}

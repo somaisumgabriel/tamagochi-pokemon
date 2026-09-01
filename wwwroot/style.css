@@ -1,0 +1,378 @@
+/* ==========================================
+   TAMAGOTCHI POKÉMON
+   ESTILO PRINCIPAL
+   ========================================== */
+
+
+/* ==========================================
+   CONFIGURAÇÕES GERAIS
+   ========================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #d9f3ff;
+
+    color: #222;
+}
+
+
+/* ==========================================
+   CONTAINER PRINCIPAL
+   ========================================== */
+
+.container {
+    width: 95%;
+    max-width: 1100px;
+
+    margin: 40px auto;
+    padding: 30px;
+
+    background: #ffffff;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ==========================================
+   CABEÇALHO
+   ========================================== */
+
+header {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+header h1 {
+    margin: 0;
+
+    font-size: 32px;
+
+    color: #333;
+}
+
+header p {
+    margin-top: 8px;
+
+    font-size: 18px;
+
+    color: #666;
+}
+
+
+/* ==========================================
+   ABAS DAS GERAÇÕES
+   ========================================== */
+
+.geracoes {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 30px;
+}
+
+.aba {
+    padding: 10px 16px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #e5e5e5;
+
+    color: #333;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.aba:hover {
+    transform: translateY(-2px);
+
+    background: #d0d0d0;
+}
+
+.aba.ativa {
+    background: #ffcb05;
+
+    color: #2a2a2a;
+
+    box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ==========================================
+   TÍTULO DA GERAÇÃO
+   ========================================== */
+
+main h2 {
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    font-size: 24px;
+}
+
+
+/* ==========================================
+   GRID DOS POKÉMON
+   ========================================== */
+
+.pokemon-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(170px, 1fr));
+
+    gap: 20px;
+}
+
+
+/* ==========================================
+   CARD DO POKÉMON
+   ========================================== */
+
+.pokemon-card {
+    padding: 15px;
+
+    background: #f7f7f7;
+
+    border: 3px solid transparent;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.pokemon-card:hover {
+    transform: translateY(-5px);
+
+    border-color: #ffcb05;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ==========================================
+   IMAGEM DO POKÉMON
+   ========================================== */
+
+.pokemon-card img {
+    width: 130px;
+
+    height: 130px;
+
+    object-fit: contain;
+
+    image-rendering: pixelated;
+}
+
+
+/* ==========================================
+   NOME DO POKÉMON
+   ========================================== */
+
+.pokemon-card h3 {
+    margin: 8px 0 3px;
+
+    font-size: 19px;
+}
+
+
+/* ==========================================
+   NÚMERO DA POKÉDEX
+   ========================================== */
+
+.pokemon-card p {
+    margin: 0 0 10px;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   BOTÃO SELECIONAR
+   ========================================== */
+
+.pokemon-card button {
+    padding: 9px 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #3b82f6;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.pokemon-card button:hover {
+    background: #2563eb;
+
+    transform: scale(1.05);
+}
+
+
+/* ==========================================
+   POKÉMON SELECIONADO
+   ========================================== */
+
+.selecionado {
+    margin-top: 40px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    background: #fff8d6;
+
+    border: 3px solid #ffcb05;
+
+    border-radius: 20px;
+}
+
+.selecionado h2 {
+    margin-top: 0;
+
+    font-size: 24px;
+}
+
+.selecionado img {
+    width: 180px;
+
+    height: 180px;
+
+    object-fit: contain;
+
+    image-rendering: pixelated;
+
+    display: block;
+
+    margin: 10px auto;
+}
+
+.selecionado h3 {
+    font-size: 22px;
+
+    margin: 10px 0 20px;
+}
+
+
+/* ==========================================
+   BOTÃO ESCOLHER POKÉMON
+   ========================================== */
+
+#botaoEscolher {
+    padding: 13px 25px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #4caf50;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#botaoEscolher:hover:not(:disabled) {
+    background: #388e3c;
+
+    transform: scale(1.05);
+}
+
+
+/* ==========================================
+   BOTÃO DESABILITADO
+   ========================================== */
+
+#botaoEscolher:disabled {
+    background: #aaa;
+
+    cursor: not-allowed;
+
+    opacity: 0.7;
+}
+
+
+/* ==========================================
+   RESPONSIVIDADE
+   ========================================== */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 95%;
+
+        margin: 15px auto;
+
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 25px;
+    }
+
+    .pokemon-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 12px;
+    }
+
+    .pokemon-card img {
+        width: 100px;
+
+        height: 100px;
+    }
+
+    .aba {
+        font-size: 13px;
+
+        padding: 8px 11px;
+    }
+}

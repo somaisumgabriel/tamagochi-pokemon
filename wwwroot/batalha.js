@@ -1,844 +1,529 @@
 // ==========================================
-// POKÉCARE - SISTEMA DE BATALHA QTE
+// BATALHA POKÉMON — QUICK TIME EVENT
 // ==========================================
 
 
 // ==========================================
-// POKÉMON DO JOGADOR
+// TABELA DE SPRITES (mesma fonte usada em
+// script.js, pela PokeAPI)
 // ==========================================
 
-const pokemonSalvo =
-    JSON.parse(localStorage.getItem("pokemonEscolhido"));
-
-
-// ==========================================
-// CONFIGURAÇÕES DO JOGADOR
-// ==========================================
-
-const jogador = {
-
-    nome: pokemonSalvo ? pokemonSalvo.nome : "Pikachu",
-
-    numero: pokemonSalvo ? pokemonSalvo.numero : 25,
-
-    nivel: 5,
-
-    hp: 100,
-
-    hpMax: 100,
-
-    ataque: 20,
-
-    xp: 0
-};
-
-
-// ==========================================
-// INIMIGO
-// ==========================================
-
-const inimigos = [
-
-    {
-        nome: "Rattata",
-        numero: 19,
-        nivel: 5,
-        hp: 80,
-        hpMax: 80,
-        ataque: 15
-    },
-
-    {
-        nome: "Pidgey",
-        numero: 16,
-        nivel: 5,
-        hp: 80,
-        hpMax: 80,
-        ataque: 15
-    },
-
-    {
-        nome: "Caterpie",
-        numero: 10,
-        nivel: 5,
-        hp: 75,
-        hpMax: 75,
-        ataque: 14
-    },
-
-    {
-        nome: "Zubat",
-        numero: 41,
-        nivel: 5,
-        hp: 85,
-        hpMax: 85,
-        ataque: 16
-    }
-
-];
-
-
-// Escolhe um inimigo aleatório
-
-const inimigoBase =
-    inimigos[
-        Math.floor(Math.random() * inimigos.length)
-    ];
-
-
-// Cria uma cópia do inimigo
-
-const inimigo = {
-
-    ...inimigoBase
-
-};
-
-
-// ==========================================
-// IMAGENS
-// ==========================================
-
-function getPokemonImageUrl(numero) {
-
+function urlImagemPokemon(numero) {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${numero}.png`;
+}
 
+const NUMERO_POR_NOME = {
+    "bulbasaur": 1,
+    "charmander": 4,
+    "squirtle": 7,
+    "pikachu": 25,
+    "chikorita": 152,
+    "cyndaquil": 155,
+    "totodile": 158,
+    "treecko": 252,
+    "torchic": 255,
+    "mudkip": 258,
+    "turtwig": 387,
+    "chimchar": 390,
+    "piplup": 393,
+    "snivy": 495,
+    "tepig": 498,
+    "oshawott": 501,
+    "chespin": 650,
+    "fennekin": 653,
+    "froakie": 656,
+    "rowlet": 722,
+    "litten": 725,
+    "popplio": 728,
+    "grookey": 810,
+    "scorbunny": 813,
+    "sobble": 816,
+    "sprigatito": 906,
+    "fuecoco": 909,
+    "quaxly": 912
+};
+
+function imagemPara(nomePokemon) {
+    const chave = (nomePokemon || "").toLowerCase().trim();
+    const numero = NUMERO_POR_NOME[chave] || NUMERO_POR_NOME["pikachu"];
+    return urlImagemPokemon(numero);
+}
+
+function nomeExibicao(nomePokemon) {
+    if (!nomePokemon) return "Pikachu";
+    return nomePokemon.charAt(0).toUpperCase() + nomePokemon.slice(1).toLowerCase();
 }
 
 
 // ==========================================
-// ELEMENTOS DA TELA
+// CONFIGURAÇÃO DA BATALHA
 // ==========================================
 
-const playerName =
-    document.getElementById("playerName");
-
-const playerLevel =
-    document.getElementById("playerLevel");
-
-const playerHp =
-    document.getElementById("playerHp");
-
-const playerHpText =
-    document.getElementById("playerHpText");
-
-const playerImage =
-    document.getElementById("playerImage");
-
-
-const enemyName =
-    document.getElementById("enemyName");
-
-const enemyLevel =
-    document.getElementById("enemyLevel");
-
-const enemyHp =
-    document.getElementById("enemyHp");
-
-const enemyHpText =
-    document.getElementById("enemyHpText");
-
-const enemyImage =
-    document.getElementById("enemyImage");
-
-
-const battleMessage =
-    document.getElementById("battleMessage");
-
-
-const qteArea =
-    document.getElementById("qteArea");
-
-const qteMarker =
-    document.getElementById("qteMarker");
-
-const qteButton =
-    document.getElementById("qteButton");
-
-
-const attackBtn =
-    document.getElementById("attackBtn");
-
-const defendBtn =
-    document.getElementById("defendBtn");
-
-const runBtn =
-    document.getElementById("runBtn");
-
-
-const battleResult =
-    document.getElementById("battleResult");
-
-const resultTitle =
-    document.getElementById("resultTitle");
-
-const resultMessage =
-    document.getElementById("resultMessage");
-
-const xpReward =
-    document.getElementById("xpReward");
-
-const continueBtn =
-    document.getElementById("continueBtn");
-
-
-const voltarBtn =
-    document.getElementById("voltarBtn");
+const cfg = {
+    maxHp: 100,
+    turnosPorLado: 5,
+    danoAtaque: { perfeito: 26, bom: 16, falha: 6 },
+    defesa: { base: 20, perfeito: 2, bom: 10 },
+    larguraPerfeito: 7,
+    larguraBom: 24
+};
 
 
 // ==========================================
-// ESTADO DA BATALHA
+// ESTADO
 // ==========================================
 
-let batalhaAtiva = true;
-
-let turnoJogador = true;
-
-let qteAtivo = false;
-
-let qtePosicao = 0;
-
-let qteDirecao = 1;
-
-let qteInterval = null;
-
-let defendendo = false;
+const state = {
+    jogadorNome: "Pikachu",
+    jogadorNivel: 1,
+    inimigoNome: "Pikachu",
+    jogadorHp: cfg.maxHp,
+    inimigoHp: cfg.maxHp,
+    turnoIndex: 0,
+    totalTurnos: cfg.turnosPorLado * 2,
+    aguardandoInput: false,
+    rodando: false,
+    ponteiroPos: 0,
+    velocidade: 0.9,
+    zonaCentro: 50,
+    inicioTempo: 0,
+    stats: { perfeito: 0, bom: 0, falha: 0 },
+    rafId: null
+};
 
 
 // ==========================================
-// INICIALIZAÇÃO
+// ELEMENTOS
 // ==========================================
+
+const el = {
+    tituloConfronto: document.getElementById("tituloConfronto"),
+    nomeJogador: document.getElementById("nomeJogador"),
+    nivelJogador: document.getElementById("nivelJogador"),
+    nomeInimigo: document.getElementById("nomeInimigo"),
+    nivelInimigo: document.getElementById("nivelInimigo"),
+    hpJogador: document.getElementById("hpJogador"),
+    hpInimigo: document.getElementById("hpInimigo"),
+    hpJogadorNumero: document.getElementById("hpJogadorNumero"),
+    hpInimigoNumero: document.getElementById("hpInimigoNumero"),
+    imagemJogador: document.getElementById("imagemJogador"),
+    imagemInimigo: document.getElementById("imagemInimigo"),
+    critterJogador: document.getElementById("critterJogador"),
+    critterInimigo: document.getElementById("critterInimigo"),
+    danoPopupJogador: document.getElementById("danoPopupJogador"),
+    danoPopupInimigo: document.getElementById("danoPopupInimigo"),
+    palco: document.getElementById("palco"),
+    mensagemBatalha: document.getElementById("mensagemBatalha"),
+    contadorJogador: document.getElementById("contadorJogador"),
+    contadorInimigo: document.getElementById("contadorInimigo"),
+    botaoAcao: document.getElementById("botaoAcao"),
+    overlayInicio: document.getElementById("overlayInicio"),
+    overlayFim: document.getElementById("overlayFim"),
+    botaoIniciar: document.getElementById("botaoIniciar"),
+    botaoNovaBatalha: document.getElementById("botaoNovaBatalha"),
+    tituloFim: document.getElementById("tituloFim"),
+    textoFim: document.getElementById("textoFim"),
+    statPerfeito: document.getElementById("statPerfeito"),
+    statBom: document.getElementById("statBom"),
+    statFalha: document.getElementById("statFalha")
+};
+
+const canvas = document.getElementById("qteCanvas");
+const ctx = canvas.getContext("2d");
+
+
+// ==========================================
+// CANVAS
+// ==========================================
+
+function redimensionarCanvas() {
+    const razao = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * razao;
+    canvas.height = rect.height * razao;
+    ctx.setTransform(razao, 0, 0, razao, 0, 0);
+}
+
+window.addEventListener("resize", redimensionarCanvas);
+
+
+// ==========================================
+// CARREGAR MASCOTE ATUAL PARA SABER
+// QUEM É O SEU POKÉMON
+// ==========================================
+
+async function carregarConfronto() {
+
+    let nomeJogador = "Pikachu";
+    let nivelJogador = 1;
+
+    try {
+        const resposta = await fetch("/api/tamagotchi");
+
+        if (resposta.ok) {
+            const mascote = await resposta.json();
+
+            if (mascote.pokemon) {
+                nomeJogador = mascote.pokemon;
+            }
+
+            nivelJogador = mascote.nivel || 1;
+        }
+    } catch (erro) {
+        console.error("Não foi possível carregar o mascote:", erro);
+    }
+
+    state.jogadorNome = nomeJogador;
+    state.jogadorNivel = nivelJogador;
+
+    // Escolhe um inimigo aleatório, diferente do seu Pokémon
+    const nomesDisponiveis = Object.keys(NUMERO_POR_NOME)
+        .filter(nome => nome !== nomeJogador.toLowerCase());
+
+    const nomeInimigo =
+        nomesDisponiveis[Math.floor(Math.random() * nomesDisponiveis.length)];
+
+    state.inimigoNome = nomeInimigo;
+
+    // Preenche a tela
+    el.nomeJogador.textContent = nomeExibicao(state.jogadorNome);
+    el.nivelJogador.textContent = "Nv." + state.jogadorNivel;
+
+    el.nomeInimigo.textContent = nomeExibicao(state.inimigoNome);
+    el.nivelInimigo.textContent = "Nv." + (1 + Math.floor(Math.random() * state.jogadorNivel));
+
+    el.imagemJogador.src = imagemPara(state.jogadorNome);
+    el.imagemInimigo.src = imagemPara(state.inimigoNome);
+
+    el.tituloConfronto.textContent =
+        nomeExibicao(state.jogadorNome) + " vs " + nomeExibicao(state.inimigoNome);
+
+    el.botaoIniciar.disabled = false;
+}
+
+
+// ==========================================
+// HP
+// ==========================================
+
+function definirHp(lado, valor) {
+    const clamped = Math.max(0, Math.min(cfg.maxHp, valor));
+
+    if (lado === "jogador") {
+        state.jogadorHp = clamped;
+        el.hpJogador.style.width = clamped + "%";
+        el.hpJogador.classList.toggle("baixa", clamped <= 25);
+        el.hpJogadorNumero.textContent = Math.round(clamped) + "/100";
+    } else {
+        state.inimigoHp = clamped;
+        el.hpInimigo.style.width = clamped + "%";
+        el.hpInimigo.classList.toggle("baixa", clamped <= 25);
+        el.hpInimigoNumero.textContent = Math.round(clamped) + "/100";
+    }
+}
+
+
+// ==========================================
+// MENSAGEM E EFEITOS
+// ==========================================
+
+function log(texto) {
+    el.mensagemBatalha.textContent = texto;
+}
+
+function mostrarDano(lado, quantidade, ehBloqueio) {
+    const popup = lado === "jogador" ? el.danoPopupJogador : el.danoPopupInimigo;
+    popup.textContent = "-" + Math.round(quantidade);
+    popup.classList.remove("show", "bloqueio");
+    void popup.offsetWidth;
+    if (ehBloqueio) popup.classList.add("bloqueio");
+    popup.classList.add("show");
+
+    const critter = lado === "jogador" ? el.critterJogador : el.critterInimigo;
+    critter.classList.remove("atingido");
+    void critter.offsetWidth;
+    critter.classList.add("atingido");
+
+    el.palco.classList.remove("tremer");
+    void el.palco.offsetWidth;
+    el.palco.classList.add("tremer");
+}
+
+
+// ==========================================
+// TURNOS
+// ==========================================
+
+function tipoTurnoAtual() {
+    return state.turnoIndex % 2 === 0 ? "jogador" : "inimigo";
+}
+
+function atualizarContadores() {
+    let contJogador = 0, contInimigo = 0;
+
+    for (let i = 0; i <= state.turnoIndex; i++) {
+        if (i % 2 === 0) contJogador++; else contInimigo++;
+    }
+
+    el.contadorJogador.textContent =
+        "Seus ataques: " + Math.min(contJogador, cfg.turnosPorLado) + "/5";
+
+    el.contadorInimigo.textContent =
+        "Ataques inimigos: " + Math.min(contInimigo, cfg.turnosPorLado) + "/5";
+}
 
 function iniciarBatalha() {
+    state.jogadorHp = cfg.maxHp;
+    state.inimigoHp = cfg.maxHp;
+    state.turnoIndex = 0;
+    state.stats = { perfeito: 0, bom: 0, falha: 0 };
 
-    // Jogador
+    definirHp("jogador", cfg.maxHp);
+    definirHp("inimigo", cfg.maxHp);
 
-    playerName.textContent =
-        jogador.nome;
+    el.overlayInicio.classList.remove("mostrar");
+    el.overlayFim.classList.remove("mostrar");
 
-    playerLevel.textContent =
-        `Lv. ${jogador.nivel}`;
-
-    playerImage.src =
-        getPokemonImageUrl(jogador.numero);
-
-
-    // Inimigo
-
-    enemyName.textContent =
-        inimigo.nome;
-
-    enemyLevel.textContent =
-        `Lv. ${inimigo.nivel}`;
-
-    enemyImage.src =
-        getPokemonImageUrl(inimigo.numero);
-
-
-    // Atualiza HP
-
-    atualizarHP();
-
-
-    battleMessage.textContent =
-        `Um ${inimigo.nome} selvagem apareceu!`;
-
-
-    qteArea.style.display =
-        "none";
-
+    redimensionarCanvas();
+    iniciarTurno();
 }
 
-
-// ==========================================
-// ATUALIZAR HP
-// ==========================================
-
-function atualizarHP() {
-
-    const porcentagemJogador =
-        (jogador.hp / jogador.hpMax) * 100;
-
-    const porcentagemInimigo =
-        (inimigo.hp / inimigo.hpMax) * 100;
-
-
-    playerHp.style.width =
-        `${Math.max(0, porcentagemJogador)}%`;
-
-    enemyHp.style.width =
-        `${Math.max(0, porcentagemInimigo)}%`;
-
-
-    playerHpText.textContent =
-        `${Math.max(0, jogador.hp)} / ${jogador.hpMax}`;
-
-    enemyHpText.textContent =
-        `${Math.max(0, inimigo.hp)} / ${inimigo.hpMax}`;
-
-}
-
-
-// ==========================================
-// ATACAR
-// ==========================================
-
-attackBtn.addEventListener(
-    "click",
-    () => {
-
-        if (
-            !batalhaAtiva ||
-            !turnoJogador
-        ) {
-            return;
-        }
-
-
-        iniciarQTE();
-
-    }
-);
-
-
-// ==========================================
-// INICIAR QTE
-// ==========================================
-
-function iniciarQTE() {
-
-    qteAtivo = true;
-
-    qteArea.style.display =
-        "block";
-
-
-    battleMessage.textContent =
-        "⚡ Acerte o momento certo!";
-
-
-    qtePosicao = 0;
-
-    qteDirecao = 1;
-
-
-    qteMarker.style.left =
-        "0%";
-
-
-    clearInterval(qteInterval);
-
-
-    qteInterval =
-        setInterval(() => {
-
-            if (!qteAtivo) {
-                return;
-            }
-
-
-            qtePosicao +=
-                qteDirecao * 2;
-
-
-            if (qtePosicao >= 96) {
-
-                qtePosicao = 96;
-
-                qteDirecao = -1;
-
-            }
-
-
-            if (qtePosicao <= 0) {
-
-                qtePosicao = 0;
-
-                qteDirecao = 1;
-
-            }
-
-
-            qteMarker.style.left =
-                `${qtePosicao}%`;
-
-
-        }, 20);
-
-}
-
-
-// ==========================================
-// BOTÃO QTE
-// ==========================================
-
-qteButton.addEventListener(
-    "click",
-    acertarQTE
-);
-
-
-// ==========================================
-// ESPAÇO PARA QTE
-// ==========================================
-
-document.addEventListener(
-    "keydown",
-    (event) => {
-
-        if (
-            event.code === "Space" &&
-            qteAtivo
-        ) {
-
-            event.preventDefault();
-
-            acertarQTE();
-
-        }
-
-    }
-);
-
-
-// ==========================================
-// CALCULAR QTE
-// ==========================================
-
-function acertarQTE() {
-
-    if (!qteAtivo) {
-        return;
-    }
-
-
-    qteAtivo = false;
-
-    clearInterval(qteInterval);
-
-
-    let dano =
-        jogador.ataque;
-
-    let mensagem = "";
-
-    let critico = false;
-
-
-    // ATAQUE PERFEITO
-
+function iniciarTurno() {
     if (
-        qtePosicao >= 47 &&
-        qtePosicao <= 53
+        state.jogadorHp <= 0 ||
+        state.inimigoHp <= 0 ||
+        state.turnoIndex >= state.totalTurnos
     ) {
-
-        dano =
-            Math.floor(
-                jogador.ataque * 2
-            );
-
-        critico = true;
-
-        mensagem =
-            "💥 PERFEITO! ACERTO CRÍTICO!";
-
+        return finalizarBatalha();
     }
 
+    atualizarContadores();
 
-    // ATAQUE NORMAL
+    const tipo = tipoTurnoAtual();
+    state.velocidade = 0.85 + state.turnoIndex * 0.045;
+    state.zonaCentro = 22 + Math.random() * 56;
+    state.aguardandoInput = true;
+    state.inicioTempo = performance.now();
 
-    else if (
-        qtePosicao >= 40 &&
-        qtePosicao <= 60
-    ) {
+    el.critterJogador.classList.remove("atacando");
+    el.critterInimigo.classList.remove("atacando");
 
-        dano =
-            Math.floor(
-                jogador.ataque * 1.3
-            );
-
-        mensagem =
-            "⚡ ÓTIMO! Você acertou!";
-
+    if (tipo === "jogador") {
+        log("Seu turno! Acerte a zona para atacar.");
+        el.botaoAcao.textContent = "Atacar";
+        el.botaoAcao.classList.remove("defender");
+    } else {
+        log("O inimigo vai atacar! Acerte a zona para se defender.");
+        el.botaoAcao.textContent = "Defender";
+        el.botaoAcao.classList.add("defender");
     }
 
+    el.botaoAcao.disabled = false;
 
-    // ERRO
+    state.rodando = true;
+    if (state.rafId) cancelAnimationFrame(state.rafId);
+    animarBarra();
+}
 
-    else {
+function animarBarra() {
+    const agora = performance.now();
+    const t = (agora - state.inicioTempo) / 1000;
+    const pos = 50 + 50 * Math.sin(t * state.velocidade * 3.4);
+    state.ponteiroPos = Math.max(0, Math.min(100, pos));
+    desenharBarra();
 
-        dano = 0;
+    if (state.rodando) {
+        state.rafId = requestAnimationFrame(animarBarra);
+    }
+}
 
-        mensagem =
-            "❌ Você errou o ataque!";
+function desenharBarra() {
+    const rect = canvas.getBoundingClientRect();
+    const w = rect.width, h = rect.height;
+    ctx.clearRect(0, 0, w, h);
 
+    const trilhaY = h / 2;
+
+    ctx.strokeStyle = "rgba(0,0,0,0.12)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(8, trilhaY);
+    ctx.lineTo(w - 8, trilhaY);
+    ctx.stroke();
+
+    const tipo = tipoTurnoAtual();
+    const corBoa = tipo === "jogador" ? "rgba(255,203,5,0.35)" : "rgba(108,196,255,0.35)";
+    const corPerfeita = tipo === "jogador" ? "#ffcb05" : "#3d86c4";
+
+    const zonaX = (state.zonaCentro / 100) * (w - 16) + 8;
+    const metadeBoa = (cfg.larguraBom / 100) * (w - 16) / 2;
+    const metadePerfeita = (cfg.larguraPerfeito / 100) * (w - 16) / 2;
+
+    ctx.fillStyle = corBoa;
+    ctx.fillRect(zonaX - metadeBoa, trilhaY - 9, metadeBoa * 2, 18);
+
+    ctx.fillStyle = corPerfeita;
+    ctx.fillRect(zonaX - metadePerfeita, trilhaY - 9, metadePerfeita * 2, 18);
+
+    const px = (state.ponteiroPos / 100) * (w - 16) + 8;
+    ctx.fillStyle = "#333";
+    ctx.beginPath();
+    ctx.moveTo(px, trilhaY - 16);
+    ctx.lineTo(px - 6, trilhaY - 24);
+    ctx.lineTo(px + 6, trilhaY - 24);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillRect(px - 1.5, trilhaY - 16, 3, 32);
+}
+
+function avaliarAcerto() {
+    const distancia = Math.abs(state.ponteiroPos - state.zonaCentro);
+    if (distancia <= cfg.larguraPerfeito / 2) return "perfeito";
+    if (distancia <= cfg.larguraBom / 2) return "bom";
+    return "falha";
+}
+
+function resolverTurno(qualidade) {
+    state.aguardandoInput = false;
+    state.rodando = false;
+    if (state.rafId) cancelAnimationFrame(state.rafId);
+    el.botaoAcao.disabled = true;
+    state.stats[qualidade]++;
+
+    const tipo = tipoTurnoAtual();
+
+    if (tipo === "jogador") {
+        el.critterJogador.classList.add("atacando");
+        const dano = cfg.danoAtaque[qualidade];
+
+        setTimeout(() => {
+            definirHp("inimigo", state.inimigoHp - dano);
+            mostrarDano("inimigo", dano, false);
+
+            const msg = qualidade === "perfeito" ? "Ataque perfeito! Dano crítico!" :
+                        qualidade === "bom" ? "Bom golpe!" :
+                        "Você quase errou o momento...";
+            log(msg);
+        }, 220);
+
+    } else {
+        const entrando = cfg.defesa.base + state.turnoIndex * 0.6;
+        const dano = qualidade === "perfeito" ? cfg.defesa.perfeito :
+                     qualidade === "bom" ? cfg.defesa.bom : entrando;
+
+        el.critterInimigo.classList.add("atacando");
+
+        setTimeout(() => {
+            definirHp("jogador", state.jogadorHp - dano);
+            mostrarDano("jogador", dano, qualidade !== "falha");
+
+            const msg = qualidade === "perfeito" ? "Defesa perfeita! Quase sem dano!" :
+                        qualidade === "bom" ? "Você bloqueou parte do golpe." :
+                        "Não deu tempo de reagir!";
+            log(msg);
+        }, 220);
     }
 
+    setTimeout(() => {
+        state.turnoIndex++;
+        iniciarTurno();
+    }, 1300);
+}
 
-    inimigo.hp -= dano;
-
-
-    if (inimigo.hp < 0) {
-
-        inimigo.hp = 0;
-
-    }
-
-
-    atualizarHP();
-
-
-    if (dano > 0) {
-
-        battleMessage.textContent =
-            `${mensagem} ${dano} de dano!`;
-
-    }
-
-    else {
-
-        battleMessage.textContent =
-            mensagem;
-
-    }
-
-
-    qteArea.style.display =
-        "none";
-
-
-    // INIMIGO DERROTADO
-
-    if (inimigo.hp <= 0) {
-
-        setTimeout(
-            vitoria,
-            900
-        );
-
-        return;
-
-    }
-
-
-    // TURNO DO INIMIGO
-
-    turnoJogador = false;
-
-
-    setTimeout(
-        turnoInimigo,
-        1200
-    );
-
+function tentarInput() {
+    if (!state.aguardandoInput) return;
+    const qualidade = avaliarAcerto();
+    resolverTurno(qualidade);
 }
 
 
 // ==========================================
-// TURNO DO INIMIGO
+// FIM DA BATALHA
 // ==========================================
 
-function turnoInimigo() {
+async function finalizarBatalha() {
+    state.rodando = false;
+    if (state.rafId) cancelAnimationFrame(state.rafId);
+    el.botaoAcao.disabled = true;
 
-    if (!batalhaAtiva) {
-        return;
+    const venceu = state.inimigoHp <= 0 && state.jogadorHp > 0
+        ? true
+        : state.jogadorHp <= 0
+            ? false
+            : state.jogadorHp >= state.inimigoHp;
+
+    let titulo, texto;
+
+    if (state.jogadorHp <= 0 && state.inimigoHp <= 0) {
+        titulo = "Empate!";
+        texto = "Os dois pokémon caíram ao mesmo tempo.";
+    } else if (state.jogadorHp <= 0) {
+        titulo = "Derrota";
+        texto = "Seu Pokémon não resistiu. Cuide dele e tente de novo!";
+    } else if (state.inimigoHp <= 0) {
+        titulo = "Vitória!";
+        texto = "Seu Pokémon venceu a batalha!";
+    } else if (state.jogadorHp > state.inimigoHp) {
+        titulo = "Vitória!";
+        texto = "O tempo acabou, mas seu Pokémon terminou em vantagem.";
+    } else if (state.inimigoHp > state.jogadorHp) {
+        titulo = "Derrota";
+        texto = "O tempo acabou e o inimigo terminou em vantagem.";
+    } else {
+        titulo = "Empate!";
+        texto = "As duas equipes terminaram com o mesmo HP.";
     }
 
+    el.tituloFim.textContent = titulo;
+    el.textoFim.textContent = texto;
+    el.statPerfeito.textContent = state.stats.perfeito;
+    el.statBom.textContent = state.stats.bom;
+    el.statFalha.textContent = state.stats.falha;
 
-    battleMessage.textContent =
-        `${inimigo.nome} está atacando!`;
+    // Dano que o SEU Pokémon sofreu de verdade durante a luta
+    const danoRecebido = cfg.maxHp - state.jogadorHp;
 
+    try {
+        await fetch("/api/tamagotchi/batalha", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                venceu: venceu,
+                danoRecebido: danoRecebido
+            })
+        });
+    } catch (erro) {
+        console.error("Não foi possível registrar o resultado da batalha:", erro);
+    }
 
-    setTimeout(
-        () => {
-
-            let dano =
-                inimigo.ataque;
-
-
-            // DEFESA
-
-            if (defendendo) {
-
-                dano =
-                    Math.floor(
-                        dano / 2
-                    );
-
-
-                battleMessage.textContent =
-                    `${inimigo.nome} atacou, mas sua defesa reduziu o dano!`;
-
-
-                defendendo = false;
-
-            }
-
-            else {
-
-                battleMessage.textContent =
-                    `${inimigo.nome} causou ${dano} de dano!`;
-
-            }
-
-
-            jogador.hp -= dano;
-
-
-            if (jogador.hp < 0) {
-
-                jogador.hp = 0;
-
-            }
-
-
-            atualizarHP();
-
-
-            // DERROTA
-
-            if (jogador.hp <= 0) {
-
-                setTimeout(
-                    derrota,
-                    800
-                );
-
-                return;
-
-            }
-
-
-            // VOLTA PARA O JOGADOR
-
-            setTimeout(
-                () => {
-
-                    turnoJogador = true;
-
-                    battleMessage.textContent =
-                        "É sua vez! Escolha uma ação.";
-
-                },
-                800
-            );
-
-
-        },
-        800
-    );
-
+    setTimeout(() => el.overlayFim.classList.add("mostrar"), 300);
 }
 
 
 // ==========================================
-// DEFENDER
+// EVENTOS
 // ==========================================
 
-defendBtn.addEventListener(
-    "click",
-    () => {
+el.botaoIniciar.addEventListener("click", iniciarBatalha);
+el.botaoNovaBatalha.addEventListener("click", async () => {
+    await carregarConfronto();
+    iniciarBatalha();
+});
+el.botaoAcao.addEventListener("click", tentarInput);
 
-        if (
-            !batalhaAtiva ||
-            !turnoJogador
-        ) {
-            return;
-        }
-
-
-        defendendo = true;
-
-        turnoJogador = false;
-
-
-        battleMessage.textContent =
-            "🛡️ Você está se defendendo!";
-
-
-        setTimeout(
-            turnoInimigo,
-            700
-        );
-
+window.addEventListener("keydown", (e) => {
+    if (e.code === "Space") {
+        e.preventDefault();
+        tentarInput();
     }
-);
+});
 
 
 // ==========================================
-// FUGIR
+// INÍCIO
 // ==========================================
 
-runBtn.addEventListener(
-    "click",
-    () => {
-
-        if (
-            !batalhaAtiva ||
-            !turnoJogador
-        ) {
-            return;
-        }
-
-
-        const conseguiuFugir =
-            Math.random() < 0.7;
-
-
-        if (conseguiuFugir) {
-
-            batalhaAtiva = false;
-
-
-            battleMessage.textContent =
-                "🏃 Você conseguiu fugir!";
-
-
-            setTimeout(
-                () => {
-
-                    window.location.href =
-                        "jogo.html";
-
-                },
-                1000
-            );
-
-        }
-
-        else {
-
-            battleMessage.textContent =
-                "❌ Você não conseguiu fugir!";
-
-
-            turnoJogador = false;
-
-
-            setTimeout(
-                turnoInimigo,
-                900
-            );
-
-        }
-
-    }
-);
-
-
-// ==========================================
-// VITÓRIA
-// ==========================================
-
-function vitoria() {
-
-    batalhaAtiva = false;
-
-
-    clearInterval(
-        qteInterval
-    );
-
-
-    const xpGanho = 50;
-
-
-    jogador.xp +=
-        xpGanho;
-
-
-    resultTitle.textContent =
-        "🏆 VITÓRIA!";
-
-
-    resultMessage.textContent =
-        `Você derrotou ${inimigo.nome}!`;
-
-
-    xpReward.textContent =
-        `⭐ +${xpGanho} XP`;
-
-
-    battleResult.classList.remove(
-        "hidden"
-    );
-
-
-    battleMessage.textContent =
-        `${inimigo.nome} foi derrotado!`;
-
-}
-
-
-// ==========================================
-// DERROTA
-// ==========================================
-
-function derrota() {
-
-    batalhaAtiva = false;
-
-
-    clearInterval(
-        qteInterval
-    );
-
-
-    resultTitle.textContent =
-        "💀 DERROTA";
-
-
-    resultMessage.textContent =
-        `${jogador.nome} foi derrotado...`;
-
-
-    xpReward.textContent =
-        "⭐ +0 XP";
-
-
-    battleResult.classList.remove(
-        "hidden"
-    );
-
-
-    battleMessage.textContent =
-        "Você perdeu a batalha...";
-
-}
-
-
-// ==========================================
-// CONTINUAR
-// ==========================================
-
-continueBtn.addEventListener(
-    "click",
-    () => {
-
-        window.location.href =
-            "jogo.html";
-
-    }
-);
-
-
-// ==========================================
-// VOLTAR
-// ==========================================
-
-voltarBtn.addEventListener(
-    "click",
-    () => {
-
-        window.location.href =
-            "jogo.html";
-
-    }
-);
-
-
-// ==========================================
-// INICIAR
-// ==========================================
-
-iniciarBatalha();
+el.botaoIniciar.disabled = true;
+el.overlayInicio.classList.add("mostrar");
+redimensionarCanvas();
+carregarConfronto();

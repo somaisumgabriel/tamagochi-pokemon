@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PokéCare</title>
+    <title>Meu Tamagotchi Pokémon</title>
 
     <link rel="stylesheet" href="jogo.css">
 
@@ -17,9 +17,7 @@
 
     <div class="tamagotchi">
 
-        <!-- ==========================================
-             TÍTULO
-             ========================================== -->
+        <!-- TÍTULO -->
 
         <header class="topo">
 
@@ -32,9 +30,26 @@
         </header>
 
 
-        <!-- ==========================================
-             ÁREA DO POKÉMON
-             ========================================== -->
+        <!-- ABAS -->
+
+        <nav class="nav-abas">
+
+            <button class="nav-aba ativa" type="button">
+                🐾 Cuidar
+            </button>
+
+            <button
+                class="nav-aba nav-aba-batalha"
+                type="button"
+                onclick="window.location.href='batalha.html'"
+            >
+                ⚔️ Batalha
+            </button>
+
+        </nav>
+
+
+        <!-- ÁREA DO POKÉMON -->
 
         <section class="area-pokemon">
 
@@ -47,13 +62,9 @@
         </section>
 
 
-        <!-- ==========================================
-             STATUS
-             ========================================== -->
+        <!-- STATUS -->
 
         <section class="status">
-
-            <!-- VIDA -->
 
             <div class="status-item">
 
@@ -62,12 +73,10 @@
                 </div>
 
                 <div class="barra">
-
                     <div
                         id="barraVida"
                         class="barra-preenchida"
                     ></div>
-
                 </div>
 
                 <span id="valorVida">
@@ -77,8 +86,6 @@
             </div>
 
 
-            <!-- FOME -->
-
             <div class="status-item">
 
                 <div class="status-nome">
@@ -86,12 +93,10 @@
                 </div>
 
                 <div class="barra">
-
                     <div
                         id="barraFome"
                         class="barra-preenchida"
                     ></div>
-
                 </div>
 
                 <span id="valorFome">
@@ -101,8 +106,6 @@
             </div>
 
 
-            <!-- HUMOR -->
-
             <div class="status-item">
 
                 <div class="status-nome">
@@ -110,12 +113,10 @@
                 </div>
 
                 <div class="barra">
-
                     <div
                         id="barraHumor"
                         class="barra-preenchida"
                     ></div>
-
                 </div>
 
                 <span id="valorHumor">
@@ -125,8 +126,6 @@
             </div>
 
 
-            <!-- ENERGIA -->
-
             <div class="status-item">
 
                 <div class="status-nome">
@@ -134,12 +133,10 @@
                 </div>
 
                 <div class="barra">
-
                     <div
                         id="barraEnergia"
                         class="barra-preenchida"
                     ></div>
-
                 </div>
 
                 <span id="valorEnergia">
@@ -149,8 +146,6 @@
             </div>
 
 
-            <!-- SONO -->
-
             <div class="status-item">
 
                 <div class="status-nome">
@@ -158,12 +153,10 @@
                 </div>
 
                 <div class="barra">
-
                     <div
                         id="barraSono"
                         class="barra-preenchida"
                     ></div>
-
                 </div>
 
                 <span id="valorSono">
@@ -175,35 +168,28 @@
         </section>
 
 
-        <!-- ==========================================
-             EXPERIÊNCIA
-             ========================================== -->
+        <!-- EXPERIÊNCIA -->
 
         <section class="experiencia">
 
             <div class="nivel">
 
                 ⭐ Nível
-
                 <span id="nivel">
                     1
                 </span>
 
             </div>
 
-
             <div class="xp-texto">
 
                 XP:
-
                 <span id="experiencia">
                     0
                 </span>
-
                 /100
 
             </div>
-
 
             <div class="barra xp">
 
@@ -217,14 +203,9 @@
         </section>
 
 
-        <!-- ==========================================
-             BOTÕES DE AÇÃO
-             ========================================== -->
+        <!-- BOTÕES -->
 
         <section class="acoes">
-
-
-            <!-- ALIMENTAR -->
 
             <button
                 onclick="alimentar()"
@@ -238,8 +219,6 @@
             </button>
 
 
-            <!-- BRINCAR -->
-
             <button
                 onclick="brincar()"
                 class="acao"
@@ -251,8 +230,6 @@
 
             </button>
 
-
-            <!-- DORMIR -->
 
             <button
                 onclick="dormir()"
@@ -266,8 +243,6 @@
             </button>
 
 
-            <!-- CARINHO -->
-
             <button
                 onclick="carinho()"
                 class="acao"
@@ -280,8 +255,6 @@
             </button>
 
 
-            <!-- BANHO -->
-
             <button
                 onclick="banho()"
                 class="acao"
@@ -293,41 +266,19 @@
 
             </button>
 
-
-            <!-- BATALHA -->
-
-            <button
-                onclick="window.location.href='batalha.html'"
-                class="acao batalha"
-            >
-
-                <span>⚔️</span>
-
-                <small>Batalha</small>
-
-            </button>
-
-
         </section>
 
 
-        <!-- ==========================================
-             MENSAGEM
-             ========================================== -->
+        <!-- MENSAGEM -->
 
-        <div
-            id="mensagem"
-            class="mensagem"
-        >
+        <div id="mensagem" class="mensagem">
 
             Seu Pokémon está esperando por você! ❤️
 
         </div>
 
 
-        <!-- ==========================================
-             TROCAR POKÉMON
-             ========================================== -->
+        <!-- VOLTAR -->
 
         <button
             onclick="voltarEscolha()"
@@ -338,13 +289,8 @@
 
         </button>
 
-
     </div>
 
-
-    <!-- ==========================================
-         JAVASCRIPT
-         ========================================== -->
 
     <script src="jogo.js"></script>
 

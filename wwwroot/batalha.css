@@ -1,664 +1,473 @@
-
-/* ==========================================
-   POKÉCARE - BATALHA
-   ========================================== */
-
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #1b1b2f;
-    color: white;
+    margin: 0;
     min-height: 100vh;
-}
 
-
-/* ==========================================
-   CONTAINER
-   ========================================== */
-
-.battle-container {
-    width: 100%;
-    min-height: 100vh;
     display: flex;
-    flex-direction: column;
-}
-
-
-/* ==========================================
-   CABEÇALHO
-   ========================================== */
-
-.battle-header {
-    height: 70px;
-    background: #25254a;
-    display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 30px;
-    border-bottom: 3px solid #444477;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #d9f3ff;
+    color: #222;
 }
 
-.battle-header h1 {
-    font-size: 25px;
+
+/* ==========================================
+   CARTÃO PRINCIPAL
+   ========================================== */
+
+.batalha-card {
+    width: 430px;
+    max-width: 95%;
+
+    padding: 25px;
+
+    background: #fff;
+
+    border-radius: 30px;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+
+    text-align: center;
+
+    position: relative;
 }
 
-#voltarBtn {
-    background: #444477;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 10px;
-    cursor: pointer;
+
+/* ==========================================
+   TOPO
+   ========================================== */
+
+.topo h1 {
+    margin: 0;
+    font-size: 21px;
+}
+
+.topo p {
+    margin: 8px 0 0;
     font-size: 15px;
+    font-weight: bold;
+    color: #666;
+}
+
+
+/* ==========================================
+   ABAS (mesmo padrão de jogo.html)
+   ========================================== */
+
+.nav-abas {
+    margin: 16px 0 4px;
+
+    display: flex;
+    gap: 8px;
+}
+
+.nav-aba {
+    flex: 1;
+
+    padding: 10px 5px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #f1f1f1;
+
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 13px;
+
+    cursor: pointer;
     transition: 0.2s;
 }
 
-#voltarBtn:hover {
-    background: #5b5b9c;
-    transform: scale(1.05);
+.nav-aba:hover {
+    transform: translateY(-2px);
+}
+
+.nav-aba.ativa {
+    background: #ff8a72;
+    color: #fff;
 }
 
 
 /* ==========================================
-   CAMPO DE BATALHA
+   ARENA (nomes + barras de HP)
    ========================================== */
 
-.battle-field {
-    flex: 1;
-    min-height: 600px;
-    position: relative;
-    padding: 30px;
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            circle at center,
-            #4b4b68 0%,
-            #292943 45%,
-            #151525 100%
-        );
-}
-
-
-/* ==========================================
-   ÁREA DO INIMIGO
-   ========================================== */
-
-.pokemon-enemy {
-    position: absolute;
-    top: 45px;
-    right: 8%;
-    width: 360px;
-
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.enemy-image {
-    width: 180px;
-    height: 180px;
-    object-fit: contain;
-
-    image-rendering: pixelated;
-
-    filter: drop-shadow(0 12px 5px rgba(0, 0, 0, 0.4));
-
-    animation: enemyFloat 2s ease-in-out infinite;
-}
-
-@keyframes enemyFloat {
-
-    0% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
-}
-
-
-/* ==========================================
-   ÁREA DO JOGADOR
-   ========================================== */
-
-.pokemon-player {
-    position: absolute;
-    bottom: 40px;
-    left: 8%;
-    width: 400px;
-
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.player-image {
-    width: 210px;
-    height: 210px;
-    object-fit: contain;
-
-    image-rendering: pixelated;
-
-    filter: drop-shadow(0 15px 5px rgba(0, 0, 0, 0.5));
-
-    animation: playerFloat 2.5s ease-in-out infinite;
-}
-
-@keyframes playerFloat {
-
-    0% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-7px);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
-}
-
-
-/* ==========================================
-   INFORMAÇÕES DO POKÉMON
-   ========================================== */
-
-.pokemon-info {
-    background: #202035;
-    border: 2px solid #68688f;
-    border-radius: 14px;
-
-    padding: 15px;
-
-    min-width: 190px;
-
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-.pokemon-name {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    margin-bottom: 10px;
-}
-
-.pokemon-name h2 {
-    font-size: 20px;
-}
-
-.pokemon-name span {
-    font-size: 13px;
-    color: #c9c9e8;
-}
-
-
-/* ==========================================
-   BARRA DE HP
-   ========================================== */
-
-.hp-container {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-
-    font-size: 12px;
-}
-
-.hp-container > span:first-child {
-    color: #a9a9c9;
-    font-weight: bold;
-}
-
-.hp-bar {
-    width: 100%;
-    height: 12px;
-
-    background: #11111d;
-
-    border-radius: 20px;
-
-    overflow: hidden;
-
-    border: 1px solid #55556e;
-}
-
-.hp-fill {
-    height: 100%;
-    width: 100%;
-
-    background: #54d66f;
-
-    border-radius: 20px;
-
-    transition: width 0.4s ease;
-}
-
-#enemyHp {
-    background: #e85d5d;
-}
-
-.hp-container > span:last-child {
-    text-align: right;
-    color: #dddddd;
-}
-
-
-/* ==========================================
-   CENTRO DA BATALHA
-   ========================================== */
-
-.battle-center {
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
-
-    width: 520px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-
-/* ==========================================
-   MENSAGEM
-   ========================================== */
-
-.battle-message {
-    background: rgba(20, 20, 35, 0.95);
-
-    border: 2px solid #7777a5;
-
-    border-radius: 12px;
-
-    padding: 15px 25px;
-
-    width: 100%;
-
-    text-align: center;
-
-    margin-bottom: 20px;
-
-    font-size: 16px;
-
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-}
-
-
-/* ==========================================
-   QTE
-   ========================================== */
-
-.qte-area {
-    width: 100%;
-
-    background: rgba(25, 25, 45, 0.95);
-
-    border: 2px solid #7777a5;
-
-    border-radius: 15px;
-
-    padding: 20px;
-
-    text-align: center;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-
-.qte-area h3 {
-    margin-bottom: 8px;
-}
-
-.qte-area p {
-    font-size: 13px;
-
-    color: #cfcfe8;
-
-    margin-bottom: 18px;
-}
-
-
-/* ==========================================
-   BARRA DO QTE
-   ========================================== */
-
-.qte-bar {
-    position: relative;
-
-    width: 100%;
-    height: 30px;
-
-    background: #11111c;
-
-    border-radius: 20px;
-
-    overflow: hidden;
-
-    border: 2px solid #55556f;
-}
-
-
-/* Área de acerto */
-
-.qte-target {
-    position: absolute;
-
-    left: 40%;
-    width: 20%;
-
-    height: 100%;
-
-    background: #65d66f;
-
-    box-shadow:
-        0 0 15px rgba(100, 220, 110, 0.8);
-}
-
-
-/* Marcador */
-
-.qte-marker {
-    position: absolute;
-
-    left: 0;
-
-    top: 0;
-
-    width: 8px;
-
-    height: 100%;
-
-    background: white;
-
-    box-shadow:
-        0 0 10px white;
-
-    transform: translateX(0);
-}
-
-
-/* ==========================================
-   BOTÃO QTE
-   ========================================== */
-
-.qte-button {
+.arena {
     margin-top: 18px;
 
-    width: 180px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
 
-    padding: 13px;
+.combatente {
+    width: 48%;
+    text-align: left;
+}
 
-    border: none;
+.combatente.inimigo {
+    text-align: right;
+}
 
-    border-radius: 10px;
-
-    background: #f4c542;
-
-    color: #202020;
-
+.combatente-nome {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
     font-weight: bold;
-
-    font-size: 16px;
-
-    cursor: pointer;
-
-    transition: 0.15s;
+    margin-bottom: 4px;
 }
 
-.qte-button:hover {
-    transform: scale(1.05);
-
-    background: #ffd95c;
+.combatente.inimigo .combatente-nome {
+    flex-direction: row-reverse;
 }
 
-.qte-button:active {
-    transform: scale(0.95);
+.hp-barra {
+    height: 12px;
+}
+
+.hp-jogador {
+    background: #55c76f;
+}
+
+.hp-inimigo {
+    background: #ff8a5b;
+    margin-left: auto;
+}
+
+.hp-jogador.baixa,
+.hp-inimigo.baixa {
+    background: #e15353;
+}
+
+.hp-numero {
+    display: block;
+    margin-top: 3px;
+    font-size: 10.5px;
+    color: #777;
 }
 
 
 /* ==========================================
-   CONTROLES
+   BARRA (reaproveitado de jogo.css)
    ========================================== */
 
-.battle-controls {
-    height: 100px;
+.barra {
+    height: 16px;
 
-    background: #25254a;
-
-    border-top: 3px solid #444477;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 15px;
-
-    padding: 15px;
-}
-
-.battle-button {
-    min-width: 150px;
-
-    padding: 15px 25px;
-
-    border: none;
-
-    border-radius: 12px;
-
-    color: white;
-
-    font-size: 15px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.battle-button:hover {
-    transform: translateY(-3px);
-}
-
-.battle-button:active {
-    transform: scale(0.95);
-}
-
-.attack {
-    background: #d84f4f;
-}
-
-.defend {
-    background: #4f78d8;
-}
-
-.run {
-    background: #777777;
-}
-
-
-/* ==========================================
-   RESULTADO
-   ========================================== */
-
-.battle-result {
-    position: fixed;
-
-    inset: 0;
-
-    background: rgba(0, 0, 0, 0.75);
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    z-index: 100;
-}
-
-.hidden {
-    display: none;
-}
-
-.result-box {
-    width: 400px;
-
-    padding: 35px;
-
-    background: #292943;
-
-    border: 3px solid #7777a5;
+    background: #ddd;
 
     border-radius: 20px;
 
-    text-align: center;
-
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
-
-    animation: resultAppear 0.3s ease;
+    overflow: hidden;
 }
 
-@keyframes resultAppear {
+.barra-preenchida {
+    height: 100%;
+    width: 100%;
 
-    from {
-        transform: scale(0.7);
-        opacity: 0;
-    }
+    border-radius: 20px;
 
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
+    transition: width 0.5s cubic-bezier(.3,.8,.4,1), background-color 0.4s;
 }
 
-.result-box h2 {
-    font-size: 32px;
 
-    margin-bottom: 15px;
+/* ==========================================
+   PALCO DOS POKÉMON
+   ========================================== */
+
+.palco {
+    position: relative;
+
+    height: 150px;
+    margin: 14px 0;
+
+    background: #dff6ff;
+    border-radius: 20px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 10px 18px;
+
+    overflow: hidden;
 }
 
-.result-box p {
-    margin: 10px 0;
+.critter {
+    position: relative;
+    width: 110px;
+    height: 110px;
 
-    color: #dddddd;
+    transition: transform 0.12s ease;
 }
 
-#xpReward {
-    font-size: 20px;
+.critter img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
 
-    color: #ffd95c;
+.critter.jogador { transform-origin: 60% 100%; }
+.critter.inimigo { transform-origin: 40% 100%; }
 
+.critter.jogador.atacando { transform: translateX(26px) scale(1.06); }
+.critter.inimigo.atacando { transform: translateX(-26px) scale(1.06); }
+
+.critter.atingido img {
+    animation: flash-hit 0.35s ease;
+}
+
+@keyframes flash-hit {
+    0% { filter: brightness(1); }
+    30% { filter: brightness(2.1) saturate(0.3); }
+    100% { filter: brightness(1); }
+}
+
+.dano-popup {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-size: 15px;
     font-weight: bold;
+    color: #e15353;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+
+    opacity: 0;
+    pointer-events: none;
 }
 
-#continueBtn {
-    margin-top: 20px;
+.dano-popup.show {
+    animation: pop-up 0.9s ease forwards;
+}
+
+.dano-popup.bloqueio {
+    color: #ffcb05;
+}
+
+@keyframes pop-up {
+    0% { opacity: 0; transform: translate(-50%, 0); }
+    15% { opacity: 1; transform: translate(-50%, -8px); }
+    100% { opacity: 0; transform: translate(-50%, -32px); }
+}
+
+.palco.tremer {
+    animation: tremer-palco 0.35s ease;
+}
+
+@keyframes tremer-palco {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-4px); }
+    40% { transform: translateX(4px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+}
+
+
+/* ==========================================
+   MENSAGEM (mesmo padrão de jogo.css)
+   ========================================== */
+
+.mensagem {
+    margin-top: 4px;
+
+    padding: 10px;
+
+    background: #fff8d6;
+    border-radius: 12px;
+
+    font-size: 13px;
+    min-height: 18px;
+}
+
+
+/* ==========================================
+   CONTADOR DE TURNOS
+   ========================================== */
+
+.contador-turnos {
+    margin-top: 8px;
+
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 10.5px;
+    color: #888;
+}
+
+
+/* ==========================================
+   BARRA DE QTE
+   ========================================== */
+
+.qte-wrap {
+    margin-top: 8px;
+}
+
+#qteCanvas {
+    width: 100%;
+    height: 46px;
+    display: block;
+
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+
+/* ==========================================
+   BOTÃO DE AÇÃO
+   ========================================== */
+
+.acao-batalha {
+    margin-top: 12px;
+}
+
+.acao-principal {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: bold;
+
+    color: #402d00;
 
     padding: 12px 30px;
 
     border: none;
+    border-radius: 14px;
 
-    border-radius: 10px;
-
-    background: #65d66f;
-
-    color: #152015;
-
-    font-weight: bold;
+    background: #ffcb05;
 
     cursor: pointer;
 
-    font-size: 15px;
+    box-shadow: 0 4px 0 #c99a00;
+    transition: transform 0.05s, box-shadow 0.05s;
 }
 
-#continueBtn:hover {
-    transform: scale(1.05);
+.acao-principal:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #c99a00;
+}
+
+.acao-principal:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
+.acao-principal.defender {
+    background: #6cc4ff;
+    color: #072336;
+    box-shadow: 0 4px 0 #3d86c4;
+}
+
+.acao-principal.defender:active {
+    box-shadow: 0 1px 0 #3d86c4;
+}
+
+.dica {
+    margin: 6px 0 0;
+    font-size: 10.5px;
+    color: #999;
 }
 
 
 /* ==========================================
-   RESPONSIVO
+   BOTÃO VOLTAR (mesmo padrão de jogo.css)
    ========================================== */
 
-@media (max-width: 900px) {
+.voltar {
+    margin-top: 15px;
 
-    .pokemon-enemy {
-        right: 3%;
-        width: 300px;
-    }
+    padding: 10px 18px;
 
-    .pokemon-player {
-        left: 3%;
-        width: 330px;
-    }
+    border: none;
+    border-radius: 10px;
 
-    .enemy-image {
-        width: 140px;
-        height: 140px;
-    }
+    background: #ddd;
 
-    .player-image {
-        width: 160px;
-        height: 160px;
-    }
+    font-family: inherit;
+    cursor: pointer;
+}
 
-    .battle-center {
-        width: 430px;
-    }
+.voltar:hover {
+    background: #ccc;
 }
 
 
-@media (max-width: 700px) {
+/* ==========================================
+   OVERLAYS (INÍCIO / FIM)
+   ========================================== */
 
-    .battle-field {
-        min-height: 700px;
+.overlay {
+    position: absolute;
+    inset: 18px;
+
+    background: rgba(255, 255, 255, 0.97);
+    border-radius: 24px;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    padding: 24px;
+    text-align: center;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.overlay.mostrar {
+    display: flex;
+}
+
+.overlay h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.overlay p {
+    margin: 0;
+    font-size: 13px;
+    color: #666;
+    max-width: 280px;
+    line-height: 1.6;
+}
+
+.stats-fim {
+    display: flex;
+    gap: 14px;
+    font-size: 12px;
+    color: #666;
+}
+
+.stats-fim b {
+    color: #222;
+}
+
+
+/* ==========================================
+   CELULAR
+   ========================================== */
+
+@media (max-width: 500px) {
+
+    .batalha-card {
+        padding: 18px;
     }
 
-    .pokemon-enemy {
-        top: 20px;
-        right: 20px;
+    .critter {
+        width: 84px;
+        height: 84px;
     }
 
-    .pokemon-player {
-        bottom: 20px;
-        left: 20px;
-    }
-
-    .battle-center {
-        width: 90%;
-        top: 50%;
-    }
-
-    .pokemon-info {
-        min-width: 150px;
-    }
-
-    .battle-controls {
-        flex-wrap: wrap;
-        height: auto;
-    }
-
-    .battle-button {
-        min-width: 110px;
-        padding: 12px;
+    .palco {
+        height: 120px;
     }
 }
